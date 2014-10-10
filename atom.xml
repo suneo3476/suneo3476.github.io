@@ -2,9 +2,9 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title><![CDATA[骨川スネ夫の日記]]></title>
   <subtitle><![CDATA[青ダヌキロボに関して]]></subtitle>
-  <link href="/atom.xml" rel="self"/>
+  <link href="/dora/atom.xml" rel="self"/>
   <link href="http://suneo3476.github.io/"/>
-  <updated>2014-10-08T19:13:44.754Z</updated>
+  <updated>2014-10-10T08:27:50.244Z</updated>
   <id>http://suneo3476.github.io/</id>
   
   <author>
