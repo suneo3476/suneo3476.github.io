@@ -1,35 +1,321 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>シンオウちほう おんがくサーチ</title>
-<style type="text/css">
-body {
-    background-color: #DDDDDD;
-    font: 12px sans-serif;
-}
-canvas {
-    background-color: white;
-}
-</style>
+	<title>ポケモンタウンマップ de おんがくサーチ</title>
+	<style type="text/css">
+		body {
+			background-color: #DDDDDD;
+			font: 12px sans-serif;
+		}
+		canvas {
+			background-color: white;
+		}
+	</style>
+
 <script type="text/javascript" src="./processing-1.4.1.min.js"></script>
 <script type="text/javascript">
-window.onload = function() {
-  var canvas = document.getElementsByTagName('canvas')[0];
+	window.onload = function() {
+		var canvasDP = document.getElementsByTagName('canvas')[0];
+		var canvasHGSS = document.getElementsByTagName('canvas')[1];
 
-  // Processing のソースコードが書かれた script 要素
-  var codeElm = document.getElementById('processing-code');
-  // 要素の内容を取得する
-  var code = codeElm.textContent || codeElm.innerText;
+	  // Processing のソースコードが書かれた script 要素
+	  // 要素の内容を取得する
+	  var codeElm = document.getElementById('processing-code-DP');
+	  var codeDP = codeElm.textContent || codeElm.innerText;
+	  var codeElm = document.getElementById('processing-code-HGSS');
+	  var codeHGSS = codeElm.textContent || codeElm.innerText;
 
-  var p = new Processing(canvas, code);
-};
+	  var pDP = new Processing(canvasDP, codeDP);
+	  var pHGSS = new Processing(canvasHGSS, codeHGSS);
+	};
 </script>
-<script id="processing-code" type="application/processing">
-// processing source write here
+
+<script id="processing-code-HGSS" type="application/processing">
+//マップの名前、座標、種別　City Town Route Sea Lake
+var mapHGSS=
+[
+['ワカバタウン',[20,12],[20,12],'t'],
+['29',[17,12],[19,12],'r'],
+['ヨシノシティ',[15,12],[16,12],'c'],
+['30',[16,9],[16,11],'r'],
+['31',[15,8],[16,8],'r'],
+['キキョウシティ',[13,7],[14,8],'c'],
+['アルフのいせき',[12,8],[12,9],'f'],
+['32',[13,9],[13,12],'r'],
+['つながりのどうくつ',[13,13],[13,13],'f'],
+['33',[13,14],[13,14],'r'],
+['ヤドンのいど',[12,13],[12,13],'f'],
+['ヒワダタウン',[11,14],[12,14],'t'],
+['ウバメのもり',[10,14],[10,14],'f'],
+['34',[10,12],[10,13],'r'],
+['コガネシティ',[8,10],[10,11],'c'],
+['35',[10,8],[10,9],'r'],
+['しぜんこうえん',[10,7],[10,7],'f'],
+['36',[11,7],[12,7],'r'],
+['37',[11,6],[11,6],'r'],
+['エンジュシティ',[10,4],[11,5],'c'],
+['38',[8,5],[9,5],'r'],
+['39',[7,5],[7,6],'r'],
+['アサギシティ',[7,7],[8,8],'c'],
+['40',[6,8],[6,9],'s'],
+['41',[5,10],[6,11],'s'],
+['うずまきじま',[6,11],[6,11],'f'],
+['タンバシティ',[4,10],[4,11],'c'],
+['42',[12,5],[12,5],'r'],
+['42',[14,5],[14,5],'r'],
+['スリバチやま',[13,5],[13,5],'f'],
+['チョウジタウン',[15,5],[15,5],'t'],
+['43',[15,3],[15,4],'r'],
+['いかりのみずうみ',[14,1],[16,2],'l'],
+['44',[16,5],[18,5],'r'],
+['こおりのぬけみち',[20,3],[20,3],'f'],
+['フスベシティ',[19,4],[20,5],'c'],
+['45',[19,6],[19,10],'r'],
+['46',[18,10],[18,11],'r'],
+['47',[1,11],[3,12],'r'],
+['48',[1,10],[2,10],'r'],
+['くらやみのほらあな',[18,6],[18,6],'f'],
+['くらやみのほらあな',[18,9],[18,9],'f'],
+['くらやみのほらあな',[16,7],[16,7],'f'],
+['サファリゾーン',[1,8],[2,9],'f'],
+['バトルフロンティア',[5,6],[6,7],'f'],
+
+['マサラタウン',[32,11],[32,11],'t'],
+['1',[32,9],[32,10],'r'],
+['トキワシティ',[31,7],[32,8],'c'],
+['2',[32,6],[32,6],'r'],
+['トキワのもり',[32,5],[32,5],'f'],
+['ディグダのあな',[32,4],[32,4],'f'],
+['ニビシティ',[32,2],[33,3],'c'],
+['3',[34,3],[35,3],'r'],
+['オツキミやま',[36,3],[36,3],'f'],
+['4',[37,3],[39,3],'r'],
+['ハナダシティ',[40,3],[41,4],'c'],
+['ハナダのどうくつ',[40,2],[40,2],'f'],
+['5',[40,5],[40,5],'r'],
+['ヤマブキシティ',[40,6],[41,7],'c'],
+['6',[40,8],[40,8],'r'],
+['クチバシティ',[40,9],[41,10],'c'],
+['ディグダのあな',[42,9],[42,9],'f'],
+['7',[39,7],[39,7],'r'],
+['タマムシシティ',[37,7],[38,8],'c'],
+['8',[42,7],[43,7],'r'],
+['シオンタウン',[44,7],[44,7],'t'],
+['9',[42,4],[43,4],'r'],
+['イワヤマトンネル',[44,4],[44,4],'f'],
+['むじんはつでんしょ',[44,5],[44,5],'f'],
+['10',[44,6],[44,6],'r'],
+['11',[43,9],[43,9],'r'],
+['12',[44,8],[44,10],'r'],
+['13',[43,11],[44,11],'r'],
+['14',[42,11],[42,13],'r'],
+['15',[39,13],[41,13],'r'],
+['16',[35,8],[36,8],'r'],
+['17',[35,9],[35,13],'r'],
+['18',[36,13],[36,13],'r'],
+['セキチクシティ',[37,12],[38,13],'c'],
+['サファリゾーン',[37,11],[37,11],'f'],
+['19',[37,14],[37,15],'w'],
+['20',[36,15],[36,15],'r'],
+['ふたごじま',[35,15],[35,15],'f'],
+['20',[33,15],[34,15],'r'],
+['グレンタウン',[32,15],[32,15],'t'],
+['21',[32,12],[32,14],'w'],
+['22',[29,8],[30,8],'r'],
+['24',[41,1],[41,2],'r'],
+['25',[42,1],[44,1],'r'],
+['26',[28,9],[28,12],'r'],
+['27',[21,12],[21,12],'r'],
+['27',[23,12],[27,12],'r'],
+['トージョウのたき',[22,12],[22,12],'f'],
+['チャンピオンロード',[28,7],[28,8],'f'],
+['セキエイこうげん',[28,6],[28,6],'f'],
+['28',[25,8],[27,8],'r'],
+['シロガネやま',[24,8],[24,8],'f'],
+['',[,],[,],''],
+];
+
+var width=46, height=16, gridSize=40, fontSize=gridSize/4.5, margin=gridSize/12;
+PFont font=createFont('メイリオ',fontSize);
+var grid=new String[width][height];
+var mouseOverX=mouseOverY=0;
+color strokeCity=color(81,81,81);
+color strokeTown=color(81,81,81);
+color strokeRoute=color(81,81,81);
+color strokeLake=color(81,81,81);
+color strokeWater=color(81,81,81);
+color strokeSea=color(81,81,81);
+color strokeFacility=color(81,81,81);
+color fillCity=color(252,81,97);
+color fillTown=color(252,81,97);
+color fillRoute=color(251,251,251);
+color fillLake=color(81,185,218);
+color fillWater=color(96,178,251);
+color fillSea=color(81,185,218);
+color fillFacility=color(112,202,145);
+
+void setup(){
+	textFont(font,fontSize);
+	size(width*gridSize,height*gridSize);
+	smooth();
+	for(var m=0;m<mapHGSS.length;m++){
+		var elm=mapHGSS[m];
+		var name=elm[0];
+		var grid1=elm[1];
+		var grid2=elm[2];
+		var minX=min(grid1[0],grid2[0]);
+		var minY=min(grid1[1],grid2[1]);
+		var difX=grid2[0]-grid1[0];
+		var difY=grid2[1]-grid1[1];
+		for(var x=minX;x<=minX+difX;x++){
+			for(var y=minY;y<=minY+difY;y++){
+				grid[x][y]=name;
+			}
+		}
+	}
+}
+
+void draw(){
+	background(81,186,268);
+	//green land
+	noStroke();
+	fill(218,162,113);
+	for(var m=0;m<mapHGSS.length;m++){
+		var elm=mapHGSS[m];
+		var type=elm[3];
+		if(type=='w' || type=='s')
+			continue;
+		var grid1=elm[1];
+		var grid2=elm[2];
+		var minX=min(grid1[0],grid2[0]);
+		var minY=min(grid1[1],grid2[1]);
+		var difX=grid2[0]-grid1[0];
+		var difY=grid2[1]-grid1[1];
+		rect(minX*gridSize-gridSize/3,minY*gridSize-gridSize/3,gridSize*(difX+1)+gridSize*2/3,gridSize*(difY+1)+gridSize*2/3);
+	}
+	//orange route, blue water route, blue town, red city, lake
+	strokeWeight(3.6);
+	for(var m=0;m<mapHGSS.length;m++){
+		var elm=mapHGSS[m];
+		var name=elm[0];
+		var grid1=elm[1];
+		var grid2=elm[2];
+		var minX=min(grid1[0],grid2[0]);
+		var minY=min(grid1[1],grid2[1]);
+		var difX=grid2[0]-grid1[0];
+		var difY=grid2[1]-grid1[1];
+		var type=elm[3];
+		switch(type){
+			case 'c':
+				stroke(strokeCity);
+				fill(fillCity);
+				break;
+			case 't':
+				stroke(strokeTown);
+				fill(fillTown);
+				break;
+			case 'l':
+				stroke(strokeLake);
+				fill(fillLake);
+				break;
+			case 'w':
+				stroke(strokeWater);
+				fill(fillWater);
+				break;
+			case 's':
+				stroke(strokeSea);
+				fill(fillSea);
+				break;
+			case 'f':
+				stroke(strokeFacility);
+				fill(fillFacility);
+				break;
+			default:
+				stroke(strokeRoute);
+				fill(fillRoute);
+				break;
+		}
+		rect(minX*gridSize+margin,minY*gridSize+margin,gridSize*(difX+1)-margin*2,gridSize*(difY+1)-margin*2);
+		//location name
+		fill(64,128,64);
+		text(name,minX*gridSize+margin*1.5,minY*gridSize+margin*3,gridSize*(difX+1)-fontSize-margin,gridSize*(difY+1)-fontSize-margin);
+	}
+ //mouseOver
+ if(grid[mouseOverX][mouseOverY]!=null){
+  	//共通するBGM名前のリストを得る
+  	String commonList;
+  	commonList=getCommonBGMNames(grid[mouseOverX][mouseOverY]);
+  	stroke(129,29,101);
+  	fill(221,156,198,32);
+		//それぞれの名前について当てはまるグリッドを探す
+		for(String listitem: commonList){
+			for(var x=0;x<width;x++){
+				for(var y=0;y<height;y++){
+					if(grid[x][y]==listitem)
+						rect(x*gridSize,y*gridSize,gridSize,gridSize);
+				}
+			}
+		}
+	}
+
+}
+void mouseMoved(){
+	var mapXY=gridToMap(mouseX,mouseY);
+	mouseOverX = mapXY[0];
+	mouseOverY = mapXY[1];
+}
+void mousePressed(){
+	var x=mouseX, y=mouseY;
+	var mapXY=gridToMap(x,y);
+	var mapName=grid[mapXY[0]][mapXY[1]];
+	if(mapName==null)
+		return;
+	var type=getType(mapName);
+	console.log(type);
+	if(type=='r'){
+		// ex:(209ばんどうろ OR 209番道路 OR (pokemon route 209)) (piano OR ピアノ)
+		mapName='(+'+mapName+'ばんどうろ OR '+mapName+'番道路)';
+	}else if(type=='w'){
+		mapName='(+'+mapName+'ばんすいどう OR '+mapName+'番水道)';
+	}else if(type=='l'){
+		mapName=mapName+'のほとり OR '+mapName;
+	}
+	mapName+='+(昼 OR 夜)';
+	var urlHead="http://youtube.com/results?search_query=";
+
+	link(urlHead+mapName, "_new");
+}
+int[] gridToMap(x, y){
+	var x=(int)(x/gridSize), y=(int)(y/gridSize);
+	return [x,y];
+}
+String getType(mapName){
+	var type='';
+	for(var m=0;m<mapDP.length;m++){
+		var elm=mapHGSS[m];
+		if(elm[0]==mapName)
+			return elm[3];
+	}
+	return '';
+}
+// String[] getCommonBGMNames(mapName){
+// 	for(var c=0;c<commonBGMDP.length;c++){
+// 		elm=commonBGMDP[c];
+// 		for(var i=0;i<elm.length;i++){
+// 			if(mapName==elm[i]){
+// 				return elm;
+// 			}
+// 		}
+// 	}
+// 	return [];
+// }
+</script>
+
+<script id="processing-code-DP" type="application/processing">
 var mapDP=
 [
 ['はなのらくえん',[28,1],[28,1],'f'],
-['うみわれのみち',[28,2],[28,10],'s'],
+['うみわれのみち',[28,2],[28,10],'w'],
 ['かくれいずみへのみち',[23,16],[24,17],'f'],
 ['エイチこのほとり',[9,1],[10,2],'l'],
 ['キッサキシティ',[11,1],[11,2],'c'],
@@ -99,7 +385,7 @@ var mapDP=
 ['230',[21,8],[23,8],'w'],
 ['こうてつじま',[3,9],[3,9],'f'],
 ['しんげつじま',[4,3],[4,3],'f'],
-['まんげつじま',[2,3],[2,3],'f'],
+['まんげつじま',[1,3],[1,3],'f'],
 ['',[,],[,]]
 ];
 
@@ -145,18 +431,20 @@ var commonBGMDP=[
 ['ハードマウンテン']
 ];
 
-var width=30, height=25, gridSize=26, fontSize=gridSize/4, margin=gridSize/12;
+var width=30, height=25, gridSize=40, fontSize=gridSize/4, margin=gridSize/12;
+var fontSizeLarge=gridSize/2;
 PFont font=createFont('メイリオ',fontSize);
+PFont fontRoute=createFont('メイリオ',fontSizeLarge);
 var grid=new String[width][height];
 var mouseOverX=mouseOverY=0;
-color strokeCity=color(198,57,57);
-color strokeTown=color(74,99,214);
-color strokeRoute=color(255,173,57);
-color strokeLake=color(214,214,165);
-color strokeWater=color(49,181,206);
-color strokeSea=color(49,181,206);
+color strokeCity=color(148,99,82);
+color strokeTown=color(148,99,82);
+color strokeRoute=color(148,99,82);
+color strokeLake=color(148,99,82);
+color strokeWater=color(148,99,82);
+color strokeSea=color(148,99,82);
 color fillCity=color(247,107,107);
-color fillTown=color(115,140,255);
+color fillTown=color(130,180,243);
 color fillRoute=color(255,198,82);
 color fillLake=color(165,255,255);
 color fillWater=color(66,206,222);
@@ -167,99 +455,100 @@ void setup(){
 	size(width*gridSize,height*gridSize);
 	smooth();
 	for(var m=0;m<mapDP.length;m++){
-	  var elm=mapDP[m];
-	  var name=elm[0];
-	  var grid1=elm[1];
-	  var grid2=elm[2];
-	  var minX=min(grid1[0],grid2[0]);
-	  var minY=min(grid1[1],grid2[1]);
-	  var difX=grid2[0]-grid1[0];
-	  var difY=grid2[1]-grid1[1];
-	  for(var x=minX;x<=minX+difX;x++){
+		var elm=mapDP[m];
+		var name=elm[0];
+		var grid1=elm[1];
+		var grid2=elm[2];
+		var minX=min(grid1[0],grid2[0]);
+		var minY=min(grid1[1],grid2[1]);
+		var difX=grid2[0]-grid1[0];
+		var difY=grid2[1]-grid1[1];
+		for(var x=minX;x<=minX+difX;x++){
 			for(var y=minY;y<=minY+difY;y++){
-	    	grid[x][y]=name;
-	    }
-	  }
+				grid[x][y]=name;
+			}
+		}
 	}
 }
 
 void draw(){
-	background(24,165,189);
+	background(99,214,222);
 	//green land
 	noStroke();
-  fill(140,206,74);
+	fill(208,191,71);
 	for(var m=0;m<mapDP.length;	m++){
-	  var elm=mapDP[m];
-	  var type=elm[3];
-	  if(type=='w' || type=='s')
-	    continue;
-	  var grid1=elm[1];
-	  var grid2=elm[2];
-	  var minX=min(grid1[0],grid2[0]);
-	  var minY=min(grid1[1],grid2[1]);
-	  var difX=grid2[0]-grid1[0];
-	  var difY=grid2[1]-grid1[1];
-	  rect(minX*gridSize-gridSize/3,minY*gridSize-gridSize/3,gridSize*(difX+1)+gridSize*2/3,gridSize*(difY+1)+gridSize*2/3);
+		var elm=mapDP[m];
+		var type=elm[3];
+		if(type=='w' || type=='s')
+			continue;
+		var grid1=elm[1];
+		var grid2=elm[2];
+		var minX=min(grid1[0],grid2[0]);
+		var minY=min(grid1[1],grid2[1]);
+		var difX=grid2[0]-grid1[0];
+		var difY=grid2[1]-grid1[1];
+		rect(minX*gridSize-gridSize/3,minY*gridSize-gridSize/3,gridSize*(difX+1)+gridSize*2/3,gridSize*(difY+1)+gridSize*2/3);
 	}
 	//orange route, blue water route, blue town, red city, lake
 	strokeWeight(3.6);
 	for(var m=0;m<mapDP.length;m++){
-	  var elm=mapDP[m];
-	  var name=elm[0];
-	  var grid1=elm[1];
-	  var grid2=elm[2];
-	  var minX=min(grid1[0],grid2[0]);
-	  var minY=min(grid1[1],grid2[1]);
-	  var difX=grid2[0]-grid1[0];
-	  var difY=grid2[1]-grid1[1];
-	  var type=elm[3];
-	  switch(type){
-	    case 'c':
-	    stroke(strokeCity);
-	    fill(fillCity);
-	    break;
-	    case 't':
-	    stroke(strokeTown);
-	    fill(fillTown);
-	    break;
-	    case 'l':
-	    stroke(strokeLake);
-	    fill(fillLake);
-	    break;
-	    case 'w':
-	    stroke(strokeWater);
-	    fill(fillWater);
-	    case 's':
-	    stroke(strokeSea);
-	    fill(fillSea);
-	    break;
-	    default:
-	    stroke(strokeRoute);
-	    fill(fillRoute);
-	    break;
-	  }
-	  rect(minX*gridSize+margin,minY*gridSize+margin,gridSize*(difX+1)-margin*2,gridSize*(difY+1)-margin*2);
+		var elm=mapDP[m];
+		var name=elm[0];
+		var grid1=elm[1];
+		var grid2=elm[2];
+		var minX=min(grid1[0],grid2[0]);
+		var minY=min(grid1[1],grid2[1]);
+		var difX=grid2[0]-grid1[0];
+		var difY=grid2[1]-grid1[1];
+		var type=elm[3];
+		switch(type){
+			case 'c':
+				stroke(strokeCity);
+				fill(fillCity);
+				break;
+			case 't':
+				stroke(strokeTown);
+				fill(fillTown);
+				break;
+			case 'l':
+				stroke(strokeLake);
+				fill(fillLake);
+				break;
+			case 'w':
+				stroke(strokeWater);
+				fill(fillWater);
+				break;
+			case 's':
+				stroke(strokeSea);
+				fill(fillSea);
+				break;
+			default:
+				stroke(strokeRoute);
+				fill(fillRoute);
+				break;
+		}
+		rect(minX*gridSize+margin,minY*gridSize+margin,gridSize*(difX+1)-margin*2,gridSize*(difY+1)-margin*2);
 		//location name
 		fill(64,128,64);
-	  text(name,minX*gridSize+margin*1.5,minY*gridSize+margin*3,gridSize*(difX+1)-fontSize-margin,gridSize*(difY+1)-fontSize-margin);
+		text(name,minX*gridSize+margin*1.5,minY*gridSize+margin*3,gridSize*(difX+1)-fontSize-margin,gridSize*(difY+1)-fontSize-margin);
 	}
  //mouseOver
-  if(grid[mouseOverX][mouseOverY]!=null){
+ if(grid[mouseOverX][mouseOverY]!=null){
   	//共通するBGM名前のリストを得る
   	String commonList;
   	commonList=getCommonBGMNames(grid[mouseOverX][mouseOverY]);
-		stroke(129,29,101);
-		fill(221,156,198,32);
+  	stroke(129,29,101);
+  	fill(221,156,198,32);
 		//それぞれの名前について当てはまるグリッドを探す
-  	for(String listitem: commonList){
-		  for(var x=0;x<width;x++){
+		for(String listitem: commonList){
+			for(var x=0;x<width;x++){
 				for(var y=0;y<height;y++){
 					if(grid[x][y]==listitem)
 						rect(x*gridSize,y*gridSize,gridSize,gridSize);
 				}
 			}
-  	}
-  }
+		}
+	}
 
 }
 void mouseMoved(){
@@ -277,13 +566,13 @@ void mousePressed(){
 	console.log(type);
 	if(type=='r'){
 		// ex:(209ばんどうろ OR 209番道路 OR (pokemon route 209)) (piano OR ピアノ)
-		mapName='(+'+mapName+'ばんどうろ OR '+mapName+'番道路 OR (pokemon route '+mapName+'))';
+		mapName='(+'+mapName+'ばんどうろ OR '+mapName+'番道路)';
 	}else if(type=='w'){
-		mapName='(+'+mapName+'ばんすいどう OR '+mapName+'番水道 OR (pokemon route '+mapName+'))';
+		mapName='(+'+mapName+'ばんすいどう OR '+mapName+'番水道)';
 	}else if(type=='l'){
 		mapName=mapName+'のほとり OR '+mapName;
 	}
-	mapName+='+(day OR night OR 昼 OR 夜)';
+	mapName+='+(昼 OR 夜)';
 	var urlHead="http://youtube.com/results?search_query=";
 
 	link(urlHead+mapName, "_new");
@@ -295,9 +584,9 @@ int[] gridToMap(x, y){
 String getType(mapName){
 	var type='';
 	for(var m=0;m<mapDP.length;m++){
-	  var elm=mapDP[m];
-	  if(elm[0]==mapName)
-	  	return elm[3];
+		var elm=mapDP[m];
+		if(elm[0]==mapName)
+			return elm[3];
 	}
 	return '';
 }
@@ -316,8 +605,12 @@ String[] getCommonBGMNames(mapName){
 </script>
 </head>
 <body>
-  <div>名前のあるマスをクリックすると、Youtube検索結果を新しいタブで表示します。Source on my <a href="https://github.com/suneo3476/PokeMap-DP">Github</a>. "PokeMAP-DPt for Youtube Search" ©2014 suneo3476 Twitter:<a href="https://twitter.com/suneo3476Pro">@suneo3476Pro</a>,<a href="https://twitter.com/suneo3476Doc">@suneo3476Doc</a><a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja">ツイート</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div>
-  <canvas id="canvas" width="780" height="650"></canvas>
+	<div>名前のあるマスをクリックすると、Youtube検索結果を新しいタブで表示します。Source on my <a href="https://github.com/suneo3476/PokeMap-DP">Github</a>. "PokeMAP-DPt for Youtube Search" ©2014 suneo3476 Twitter:<a href="https://twitter.com/suneo3476Pro">@suneo3476Pro</a>,<a href="https://twitter.com/suneo3476Doc">@suneo3476Doc</a><a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja">ツイート</a>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+	</div>
+	<div>シンオウちほう（動きます）</div>
+	<canvas id="canvasDP" width="780" height="650"></canvas>
+	<div>ジョウト・カントーちほう（動きません）</div>
+	<canvas id="canvasFRLG" width="780" height="650"></canvas>
 </body>
 </html>
