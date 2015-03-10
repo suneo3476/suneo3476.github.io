@@ -309,16 +309,28 @@ void mousePressed(){
 	var mapName=grid[mapXY[0]][mapXY[1]];
 	if(mapName==null)
 		return;
-	var type=getType(mapName);
-	console.log(type);
-	if(type=='r'){
-		// ex:(209ばんどうろ OR 209番道路 OR (pokemon route 209)) (piano OR ピアノ)
-		mapName='(+'+mapName+'ばんどうろ OR '+mapName+'番道路)';
-	}else if(type=='w'){
-		mapName='(+'+mapName+'ばんすいどう OR '+mapName+'番水道)';
-	}else if(type=='l'){
-		// No TODO
+	//BGMが共通するマップ名のリストを取得する
+	commonMapNames = getCommonBGMNames(mapName);
+	//マップ名でOR検索の文字列を作る
+	mapName = '( ' + commonMapNames.join(' OR ') + ' )';
+	console.log(mapName);
+
+	//マップの種別に道路または水道がある場合は検索文字列に含める
+	for(var i = 0; i < commonMapNames.length; i++){
+		var type=getType(commonMapNames[i]);
+		if(type=='r'){
+			mapName += ' AND (道路 OR どうろ)';
+			break;
+		}
+		if(type=='w'){
+			mapName += ' AND (水道 OR すいどう)';
+			break;
+		}
 	}
+
+	//外国語の検索結果を弾く,世代を示す
+	mapName += ' AND (HGSS OR ハートゴールド OR ソウルシルバー)';
+
 	var urlHead="http://youtube.com/results?search_query=";
 
 	link(urlHead+mapName, "_new");
@@ -601,17 +613,28 @@ void mousePressed(){
 	var mapName=grid[mapXY[0]][mapXY[1]];
 	if(mapName==null)
 		return;
-	var type=getType(mapName);
-	console.log(type);
-	if(type=='r'){
-		// ex:(209ばんどうろ OR 209番道路 OR (pokemon route 209)) (piano OR ピアノ)
-		mapName='(+'+mapName+'ばんどうろ OR '+mapName+'番道路)';
-	}else if(type=='w'){
-		mapName='(+'+mapName+'ばんすいどう OR '+mapName+'番水道)';
-	}else if(type=='l'){
-		mapName=mapName+'のほとり OR '+mapName;
+	//BGMが共通するマップ名のリストを取得する
+	commonMapNames = getCommonBGMNames(mapName);
+	//マップ名でOR検索の文字列を作る
+	mapName = '( ' + commonMapNames.join(' OR ') + ' )';
+	console.log(mapName);
+
+	//マップの種別に道路または水道がある場合は検索文字列に含める
+	for(var i = 0; i < commonMapNames.length; i++){
+		var type=getType(commonMapNames[i]);
+		if(type=='r'){
+			mapName += ' AND (道路 OR どうろ)';
+			break;
+		}
+		if(type=='w'){
+			mapName += ' AND (水道 OR すいどう)';
+			break;
+		}
 	}
-	mapName+='+(昼 OR 夜)';
+
+	//外国語の検索結果を弾く,世代を示す
+	mapName += ' AND (DP OR ダイヤモンド OR パール OR プラチナ)';
+
 	var urlHead="http://youtube.com/results?search_query=";
 
 	link(urlHead+mapName, "_new");
@@ -647,9 +670,9 @@ String[] getCommonBGMNames(mapName){
 	<div>名前のあるマスをクリックすると、Youtube検索結果を新しいタブで表示します。Source on my <a href="https://github.com/suneo3476/PokeMap-DP">Github</a>. "PokeMAP-DPt for Youtube Search" ©2014 suneo3476 Twitter:<a href="https://twitter.com/suneo3476Pro">@suneo3476Pro</a>,<a href="https://twitter.com/suneo3476Doc">@suneo3476Doc</a><a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja">ツイート</a>
 		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 	</div>
-	<div>ジョウト・カントーちほう（動きません）</div>
+	<div>ジョウトちほう・カントーちほう（ハートゴールド・ソウルシルバー）</div>
 	<canvas id="canvasHGSS" width="780" height="650"></canvas>
-	<div>シンオウちほう（動きます）</div>
+	<div>シンオウちほう（ダイヤモンド・パール・プラチナ）</div>
 	<canvas id="canvasDP" width="780" height="650"></canvas>
 </body>
 </html>
