@@ -33,7 +33,7 @@
 
 <script id="processing-code-HGSS" type="application/processing">
 //マップの名前、座標、種別　City Town Route Sea Lake
-var mapHGSS=
+var map=
 [
 ['ワカバタウン',[20,12],[20,12],'t'],
 ['29',[17,12],[19,12],'r'],
@@ -133,10 +133,45 @@ var mapHGSS=
 ['セキエイこうげん',[28,6],[28,6],'f'],
 ['28',[25,8],[27,8],'r'],
 ['シロガネやま',[24,8],[24,8],'f'],
-['',[,],[,],''],
+['',[,],[,],'']
 ];
 
-var width=46, height=16, gridSize=40, fontSize=gridSize/4.5, margin=gridSize/12;
+var commonBGM=[
+['マサラタウン'],
+['トキワシティ','ニビシティ','ヤマブキシティ'],
+['ハナダシティ','セキチクシティ'],
+['クチバシティ'],
+['タマムシシティ'],
+['シオンタウン'],
+['グレンタウン'],
+['トキワのもり'],
+['3','4','5','6','7','8','9','10','16','17','18','19','20','21','22'],
+['11','12','13','14','15'],
+['24','25'],
+[],
+['ワカバタウン'],
+['ヨシノシティ','チョウジタウン'],
+['キキョウシティ','アサギシティ'],
+['ヒワダタウン','フスベシティ'],
+['コガネシティ'],
+['エンジュシティ','タンバシティ'],
+['29'],
+['30','31','32','33'],
+['34','35','36','37'],
+['38','39'],
+['40','41','42','いかりのみずうみ','43','44','45','46'],
+['47','48'],
+['アルフのいせき','ウバメのもり','つながりのどうくつ','うずまきじま','スリバチやま','トージョウのたき','ディグダのあな','イワヤマトンネル','ハナダのどうくつ'],
+['くらやみのほらあな','ヤドンのいど','こおりのぬけみち'],
+['しぜんこうえん'],
+['サファリゾーン'],
+['チャンピオンロード'],
+['セキエイこうげん'],
+['28','シロガネやま'],
+['26','27']
+];
+
+var width=46, height=16, gridSize=40, fontSize=gridSize/4, margin=gridSize/12;
 PFont font=createFont('メイリオ',fontSize);
 var grid=new String[width][height];
 var mouseOverX=mouseOverY=0;
@@ -159,8 +194,8 @@ void setup(){
 	textFont(font,fontSize);
 	size(width*gridSize,height*gridSize);
 	smooth();
-	for(var m=0;m<mapHGSS.length;m++){
-		var elm=mapHGSS[m];
+	for(var m=0;m<map.length;m++){
+		var elm=map[m];
 		var name=elm[0];
 		var grid1=elm[1];
 		var grid2=elm[2];
@@ -181,8 +216,8 @@ void draw(){
 	//green land
 	noStroke();
 	fill(218,162,113);
-	for(var m=0;m<mapHGSS.length;m++){
-		var elm=mapHGSS[m];
+	for(var m=0;m<map.length;m++){
+		var elm=map[m];
 		var type=elm[3];
 		if(type=='w' || type=='s')
 			continue;
@@ -196,8 +231,8 @@ void draw(){
 	}
 	//orange route, blue water route, blue town, red city, lake
 	strokeWeight(3.6);
-	for(var m=0;m<mapHGSS.length;m++){
-		var elm=mapHGSS[m];
+	for(var m=0;m<map.length;m++){
+		var elm=map[m];
 		var name=elm[0];
 		var grid1=elm[1];
 		var grid2=elm[2];
@@ -246,7 +281,7 @@ void draw(){
   	//共通するBGM名前のリストを得る
   	String commonList;
   	commonList=getCommonBGMNames(grid[mouseOverX][mouseOverY]);
-  	stroke(129,29,101);
+  	stroke(204,57,73);
   	fill(221,156,198,32);
 		//それぞれの名前について当てはまるグリッドを探す
 		for(String listitem: commonList){
@@ -292,28 +327,28 @@ int[] gridToMap(x, y){
 }
 String getType(mapName){
 	var type='';
-	for(var m=0;m<mapDP.length;m++){
-		var elm=mapHGSS[m];
+	for(var m=0;m<map.length;m++){
+		var elm=map[m];
 		if(elm[0]==mapName)
 			return elm[3];
 	}
 	return '';
 }
-// String[] getCommonBGMNames(mapName){
-// 	for(var c=0;c<commonBGMDP.length;c++){
-// 		elm=commonBGMDP[c];
-// 		for(var i=0;i<elm.length;i++){
-// 			if(mapName==elm[i]){
-// 				return elm;
-// 			}
-// 		}
-// 	}
-// 	return [];
-// }
+String[] getCommonBGMNames(mapName){
+	for(var c=0;c<commonBGM.length;c++){
+		elm=commonBGM[c];
+		for(var i=0;i<elm.length;i++){
+			if(mapName==elm[i]){
+				return elm;
+			}
+		}
+	}
+	return [];
+ }
 </script>
 
 <script id="processing-code-DP" type="application/processing">
-var mapDP=
+var map=
 [
 ['はなのらくえん',[28,1],[28,1],'f'],
 ['うみわれのみち',[28,2],[28,10],'w'],
@@ -390,8 +425,9 @@ var mapDP=
 ['',[,],[,]]
 ];
 
-//explain common bgm ... on the way
-var commonBGMDP=[
+//同じ音源のマップ
+var commonBGM=[
+[],
 [201,202,219],
 [203,204,218],
 [205,'たにまのはつでんしょ','タタラせいてつじょ'],
@@ -455,8 +491,8 @@ void setup(){
 	textFont(font,fontSize);
 	size(width*gridSize,height*gridSize);
 	smooth();
-	for(var m=0;m<mapDP.length;m++){
-		var elm=mapDP[m];
+	for(var m=0;m<map.length;m++){
+		var elm=map[m];
 		var name=elm[0];
 		var grid1=elm[1];
 		var grid2=elm[2];
@@ -477,8 +513,8 @@ void draw(){
 	//green land
 	noStroke();
 	fill(208,191,71);
-	for(var m=0;m<mapDP.length;	m++){
-		var elm=mapDP[m];
+	for(var m=0;m<map.length;	m++){
+		var elm=map[m];
 		var type=elm[3];
 		if(type=='w' || type=='s')
 			continue;
@@ -492,8 +528,8 @@ void draw(){
 	}
 	//orange route, blue water route, blue town, red city, lake
 	strokeWeight(3.6);
-	for(var m=0;m<mapDP.length;m++){
-		var elm=mapDP[m];
+	for(var m=0;m<map.length;m++){
+		var elm=map[m];
 		var name=elm[0];
 		var grid1=elm[1];
 		var grid2=elm[2];
@@ -538,7 +574,7 @@ void draw(){
   	//共通するBGM名前のリストを得る
   	String commonList;
   	commonList=getCommonBGMNames(grid[mouseOverX][mouseOverY]);
-  	stroke(129,29,101);
+  	stroke(204,57,73);
   	fill(221,156,198,32);
 		//それぞれの名前について当てはまるグリッドを探す
 		for(String listitem: commonList){
@@ -584,16 +620,16 @@ int[] gridToMap(x, y){
 }
 String getType(mapName){
 	var type='';
-	for(var m=0;m<mapDP.length;m++){
-		var elm=mapDP[m];
+	for(var m=0;m<map.length;m++){
+		var elm=map[m];
 		if(elm[0]==mapName)
 			return elm[3];
 	}
 	return '';
 }
 String[] getCommonBGMNames(mapName){
-	for(var c=0;c<commonBGMDP.length;c++){
-		elm=commonBGMDP[c];
+	for(var c=0;c<commonBGM.length;c++){
+		elm=commonBGM[c];
 		for(var i=0;i<elm.length;i++){
 			if(mapName==elm[i]){
 				return elm;
