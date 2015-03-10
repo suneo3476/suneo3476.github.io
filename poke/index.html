@@ -317,9 +317,8 @@ void mousePressed(){
 	}else if(type=='w'){
 		mapName='(+'+mapName+'ばんすいどう OR '+mapName+'番水道)';
 	}else if(type=='l'){
-		mapName=mapName+'のほとり OR '+mapName;
+		// No TODO
 	}
-	mapName+='+(昼 OR 夜)';
 	var urlHead="http://youtube.com/results?search_query=";
 
 	link(urlHead+mapName, "_new");
