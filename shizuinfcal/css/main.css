@@ -6,6 +6,20 @@ html {
     line-height: 1.4;
 }
 
+iframe {
+  width:100%;
+}
+
+h2{
+  border-top:5px solid #363947
+}
+h3{
+  border-top:5px solid #40AAEF
+}
+h4{
+  border-top:3px solid #58BE89
+}
+
 ::-moz-selection {
     background: #b3d4fc;
     text-shadow: none;
