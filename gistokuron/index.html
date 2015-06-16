@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>4group - Masato Fujimori</title>
+		<style media="screen">
+			body{
+			width:100%;
+			}
+			#map_canvas{
+			width:80%;
+			border:1px sloid #373c3e;
+			margin: 0 auto;
+			}
+		</style>
+
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDPbj9S7-zV4tCzs__QHX_sCAfgjTyrmJA&sensor=false"></script>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+		<script type="text/javascript">
+		$(document).ready(function(){
+			//ready for getting data
+			var request = [
+				{url:'https://dl.dropboxusercontent.com/u/29129610/gistokuron/sanaruko-line-data.csv'},
+				{url:'https://dl.dropboxusercontent.com/u/29129610/gistokuron/sanaruko-point-data.csv'}
+			];
+			var jqXHRList = [];
+			for(var i=0; i<request.length; i++){
+				jqXHRList.push($.ajax({
+					url: request[i].url,
+					type: 'GET'
+				}));
+			}
+			$.when.apply($, jqXHRList).done(function () {
+				var data = [];
+				var statuses = [];
+				var jqXHRResultList = [];
+				for (var i = 0; i < arguments.length; i++) {
+					var result = arguments[i];
+					data.push(result[0]);
+					statuses.push(result[1]);
+					jqXHRResultList.push(result[3]);
+				}
+			}).done(function(data1,data2){
+				//fix data into array
+				var tmp1 = data1[0].split("\r\n");
+				var lineDataLength = tmp1.length-2;
+				var lineData = new Array(lineDataLength);
+				for(var i=0; i<lineDataLength; i++){
+					lineData[i] = new Array(2);
+					lineData[i] = tmp1[i+1].split(",");
+				}
+
+				var tmp2 = data2[0].split("\r\n");
+				var pointDataLength = tmp2.length-1;
+				var pointData = new Array(pointDataLength);
+				for(var i=0; i<pointDataLength; i++){
+					pointData[i] = new Array(3);
+					pointData[i] = tmp2[i].split(",");
+				}
+				pointData.shift();
+
+				//create map
+				var sanarukoMap = new google.maps.Map(document.getElementById("map_canvas"), {
+					zoom: 14,
+					center: new google.maps.LatLng(34.711348, 137.690435),
+					mapTypeId: google.maps.MapTypeId.ROADMAP,
+					scaleControl: true
+				});
+
+				//create line
+				var lineArray = new Array(lineDataLength);
+				for(var i=0;i<lineDataLength;i++)
+					lineArray[i] = new google.maps.LatLng(lineData[i][1],lineData[i][0]);
+				var polyline = new google.maps.Polyline({
+					map:sanarukoMap,
+					path:lineArray
+				});
+
+				//create point
+				pointDataLength = pointData.length;
+				var infoWindow = new Array(pointDataLength);
+				var marker = new Array(pointDataLength);
+
+				for(var i=0;i<pointDataLength;i++){
+					marker[i] = new google.maps.Marker({
+						position: new google.maps.LatLng(pointData[i][2],pointData[i][1]),
+						map:sanarukoMap,
+						title: pointData[i][0]
+					});
+				}
+
+				//create window
+				//1.クロージャを使ったやり方
+				// function click(window, marker){return function(){window.open(sanarukoMap,marker);}}
+				// for(var i=0;i<pointData.length;i++)
+				// 	google.maps.event.addListener(marker[i], "click", click(new google.maps.InfoWindow({
+					// 	content: pointData[i][0]
+					// }), marker[i]));
+
+				//2.bind関数を使ったやり方
+				for(var i=0;i<pointData.length;i++)
+				 	google.maps.event.addListener(marker[i], "click", function(i){new google.maps.InfoWindow({
+						content: pointData[i][0]
+					}).open(sanarukoMap, marker[i]);}.bind(this,i));
+			});
+		});
+		</script>
+	</head>
+
+	<body>
+		<br/><br/>
+		<div id="map_canvas" style="width:480px; height:480px"></div>
+		<p>Masato Fujimori 2015</p>
+		<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><a xmlns:cc="http://creativecommons.org/ns#" href="https://suneo3476.github.io" property="cc:attributionName" rel="cc:attributionURL">Masato Fujimori</a> 作『<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Sanaruko Lake GIS Mapping</span>』は<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際 ライセンス</a>で提供されています。
+
+	</body>
+</html>
