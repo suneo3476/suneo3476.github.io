@@ -12,11 +12,31 @@
 		canvas {
 			background-color: white;
 		}
+		#canvas .olControlAttribution {
+		    font-size:13px;
+		    bottom:3px;
+		}
 	</style>
-
+	<script type="text/javascript" src="http://www.openlayers.org/api/OpenLayers.js"></script>
+	<script type="text/javascript">
+		function init() {
+			var map = new OpenLayers.Map("canvas");
+			var mapnik = new OpenLayers.Layer.OSM();
+			map.addLayer(mapnik);
+			var lonLat = new OpenLayers.LonLat(137.738414, 34.726757)
+					.transform(
+						new OpenLayers.Projection("EPSG:4326"),
+						new OpenLayers.Projection("EPSG:900913")
+					);
+			map.setCenter(lonLat, 13);
+		}
+	</script>
 </head>
-<body>
-<div id="michi">
+<body onload="init();">
+<div id="mapContent">
+	<div id="canvas" style="width:500px; height:400px"></div>
+</div>
+<div id="imgContent">
 	<img src="img/michi.png" alt="浜松の道" style="float:left">
 	<img src="img/meshi.png" alt="うなメシ">
 </div>

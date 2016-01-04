@@ -1,0 +1,17 @@
+commit 2d2f5c6f6d4956fdc1a0630e63b54f89ab777896
+Author: Masato Fujimori <suneo3476@gmail.com>
+Date:   Sat Mar 21 03:35:39 2015 +0900
+
+    test commit
+
+commit bc8ce70591d922e368a15f6cec5e1d9171feca5c
+Author: Masato Fujimori <suneo3476@gmail.com>
+Date:   Sat Mar 21 03:31:10 2015 +0900
+
+    test pjs
+
+commit 95e6ad3fb1ab01601eec3f4ef6ebe104a6010832
+Author: Masato Fujimori <suneo3476@gmail.com>
+Date:   Sat Oct 25 23:01:24 2014 +0900
+
+    n nd commit.
