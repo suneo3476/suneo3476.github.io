@@ -4,4 +4,4 @@
 $('#textarea-submit').click(function(e) {
     return e.preventDefault();                      //<=★コレよ。
 });
-$("[name='my-checkbox']").bootstrapSwitch();
+$("[name='textarea-switch']").bootstrapSwitch();
