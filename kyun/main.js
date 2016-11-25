@@ -8,7 +8,8 @@ $(document).ready(()=>{
 	OAuth.popup('twitter')
   		 .done(function(res) {
     	res.get('/1.1/account/verify_credentials.json').done(function(data) {
-    		$('#icon').attr('src','http://pbs.twimg.com/profile_images/792720683486687232/O1HpqMR__normal.jpg')
+    		// console.log(data)
+   		$('#icon').attr('src',data.profile_image_url)
     	})
 	})
 })
