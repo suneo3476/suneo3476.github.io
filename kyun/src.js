@@ -2,7 +2,7 @@ $(document).ready(()=>{
 	$('#textarea-submit').click((e) => {
 	    return e.preventDefault();                      //<=★コレよ。
 	});
-	$("[name='textarea-switch']").bootstrapSwitch();
+	// $("[name='textarea-switch']").bootstrapSwitch();
 	OAuth.initialize('p9ec33SRheUKfTzs-y-6crX_ros');
 	OAuth.popup('twitter')
   		 .done(function(res) {
