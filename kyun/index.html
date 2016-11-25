@@ -30,7 +30,7 @@
               <div class="form-group">
                 <label for="textArea" class="col-lg-3 control-label">お気持ち表明</label>
                 <div class="col-lg-10">
-                  <textarea class="form-control" rows="3" id="textArea"></textarea>
+                  <textarea class="form-control" rows="3" id="textarea-input"></textarea>
                   <span class="help-block">ヒント：穴（あな）、壁（かべ）、崖（がけ）</span>
                 </div>
               </div>
@@ -39,16 +39,19 @@
         </div>
       </div>
       <div class="col-lg-4 col-lg-offset-1">
-      	<h2>あなたの様子</h2>
-      	<div id="viewer">
-      		<img src="default.gif" alt="">
-      	</div>
+      	<h2>あなた</h2>
+      	<div id="app">
+      		<img id="icon" src="default.gif" alt="">
+      		<div>通常の様子がdefault.gifで、テキストによって様子が変化するのをgifの差し替えで表す</div>
+       	</div>
       </div>
     </div>
   </div>
 </div>
 	<script src="./bower_components/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8" async defer></script>
 	<script src="./bower_components/bootstrap-switch/dist/js/bootstrap-switch.min.js" type="text/javascript" charset="utf-8" async defer></script>
+	<script src="./bower_components/vue/dist/vue.min.js" type="text/javascript" charset="utf-8" async defer></script>
+	<script src="bower_components/oauth-js/dist/oauth.min.js"></script>
 	<script src="./main.js" type="text/javascript" charset="utf-8" async defer></script>
 </body>
 </html>
