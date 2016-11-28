@@ -15,6 +15,7 @@ $(document).ready(()=>{
 	   			$('#icon').attr({'src':url})
     		}
     		imgPreloader.src=url
+    		console.log(url)
     	})
 	})
 })

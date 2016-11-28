@@ -16,6 +16,31 @@
 	<a href="https://twitter.com/share" class="twitter-share-button" data-size="large">Tweet</a>
 	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 </div>
+<script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(document).ready({
+	const post_api = function(url,data){
+		const dfd = $.Deferred();
+		$.ajax({
+			type: 'POST',
+			url: url,
+			dataType: 'json',
+			data: data
+		})
+		.done(function(res){
+			dfd.resolve(res);
+		})
+		.fail(function(res){
+			dfd.reject(res);
+		});
+		return dfd.promise();
+	}
+	post_api('http://cdn.syndication.twimg.com/widgets/timelines/714063409927430145')
+	.done(res){
+		console.log(res);
+	}
+});
+</script>
 </body>
 </html>
