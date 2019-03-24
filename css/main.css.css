@@ -1,0 +1,50 @@
+/* line 1, ../scss/main.css.scss */
+body {
+  font: 14px ubuntu, mplus1p, sans-serif;
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+
+/* line 8, ../scss/main.css.scss */
+.header {
+  background-color: white;
+  text-align: right;
+}
+
+/* line 13, ../scss/main.css.scss */
+.title {
+  background-image: url("/img/title_bg.jpg");
+  background-size: auto 255px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding-top: 150px;
+  padding-bottom: 50px;
+  padding-right: 10px;
+}
+/* line 22, ../scss/main.css.scss */
+.title .portfolio_title {
+  font-size: x-large;
+  border-bottom: solid 3px white;
+}
+
+/* line 28, ../scss/main.css.scss */
+.body {
+  background-color: white;
+  padding: 24px;
+}
+/* line 31, ../scss/main.css.scss */
+.body p {
+  margin-left: 16px;
+}
+/* line 34, ../scss/main.css.scss */
+.body ul {
+  margin-left: 24px;
+  border: 0;
+  padding: 0;
+}
+/* line 39, ../scss/main.css.scss */
+.body h2 {
+  border-bottom: dotted 1px gray;
+}
