@@ -7,7 +7,9 @@ body {
   
   .header{
       background-color:white;
-      text-align: right;
+      .menu{
+          text-align: right;
+      }
   }
   
   .title{
@@ -38,5 +40,27 @@ body {
     }
     h2{
         border-bottom: dotted 1px gray;
+    }
+    h3{
+        border-left: solid 4px gray;
+        padding-left: 4px;
+    }
+    .ss{
+        margin-left: 24px;
+    }
+    p.imagebox{
+        display: inline-block;
+        margin: 0px 3px 7px 0px;
+        img{
+            display:block;
+            margin: 0px 0px 3px 0px;
+            width:240px;
+            height:240px;
+        }
+        span.caption{
+            font-size: 0.9em;
+            text-align:center;
+            color:gray;
+        }
     }
   }

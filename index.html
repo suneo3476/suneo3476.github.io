@@ -9,8 +9,12 @@
 
 <!-- ヘッダメニュー -->
 <div class="header">
-<a href="#blogs">#BLOGS</a>
-<a href="#workds">#WORKS</a>
+<div class="menu">
+	<a href="#blogs">#自己紹介</a>
+	<a href="#workds">#スキルと制作物</a>
+	<a href="#workds">#SNS</a>
+	<a href="#workds">#連絡先</a>
+</div>
 </div>
 
 <!-- タイトル -->
@@ -35,9 +39,98 @@
 	</p>
 
 	<h2>スキルと制作物</h2>
-	編集中
-	・追分小学校HP
-	・はまポンまつり
+
+	<h3><strong>Wikipediaライクな教科書システムの実装</strong></h3>
+	<p>
+		学部卒業研究で作ったものです。紙の教科書みたいに最初から最後まで流れのある編纂物とは違った、
+		ニコニコ大百科のような教科書があったら面白いよね、という発想で作ったものです。<br>
+		2014年度に大学のドメインで公開して、静岡大学情報学部情報社会学科で開講の科目「公共圏論」で実際に学生に触ってもらいました。
+		WikiエンジンはWikipediaが採用している <strong>MediaWiki</strong> です。
+		LAMP構成で、必要に応じてフロントエンドを <strong>JavaScript</strong> を書いてました。
+		<br>余談として、学術的新規性と言われると詰まることもあり個人的には黒歴史なんですが、
+		後にある後輩が当時「これみたいなものを作りたい」とWebエンジニアを志したと語ってくれたのを聞いて、
+		けして無駄ではなかったなと思いました。
+	</p>
+	<div class="ss">
+		<p class="imagebox">
+			<img src="/img/mwiki-1.png" alt="カテゴリページ" style="width:360px;height:240px">
+			<span class="caption">いわゆる「タグ」のページ</span>
+		</p>
+		<p class="imagebox">
+			<img src="/img/mwiki-2.png" alt="カードページ" style="width:360px;height:240px">
+			<span class="caption">ひとつの記事は「カード」という単位の小さな分量です</span>
+		</p>
+	</div>
+
+	<h3><strong><a href="https://suneo3476.github.io/poke">ポケモンBGMのYoutube検索を支援するタウンマップ型アプリ</a></strong></h3>
+	<p>
+		2015年作。ゲームのBGMを耳コピしてピアノアレンジして演奏するのが趣味の私にとって、
+		原曲の確認作業は必須で、またアレンジ作品を視聴するのにもYoutubeを利用していました。
+		しかし、マップの名前をいちいち憶えているわけでもなく、
+		アップロード者のつけたタイトルにもしばしば表記ゆれが見られました。
+		極めつけは、同じBGMが複数の別名のマップで使われているケースで、
+		想定される範囲でORとANDを駆使して探し出す必要があります。
+		<br>当然<strong>「やってられるか！」</strong>となり、タウンマップをクリックすれば
+		一発で検索結果に飛べるようなものを作ることにした結果が、このアプリです。
+		<br>ビジュアルデザインを用途とする<strong>Processing</strong>言語を使い、
+		Webブラウザ上で使用可能にするため <strong>JavaScript</strong> 移植版の
+		<strong>Processing.js</strong> で書きました。画像を用いないので、
+		ソースコード単体では非常に軽量に動作するアプリになります。
+		<br>ソースコードは<a href="https://github.com/suneo3476/pokedp-map">Github</a>にあります。
+		
+	</p>
+	<div class="ss">
+		<p class="imagebox">
+			<img src="/img/poke-1.jpg" alt="ダイヤモンド・パールの「シンオウ地方」" style="width:360px">
+			<span class="caption">いわゆる「タグ」のページ</span>
+		</p>
+		<p class="imagebox">
+			<img src="/img/poke-2.jpg" alt="カードページ" style="width:720px">
+			<span class="caption">ハートゴールド・ソウルシルバーの「ジョウト地方」「カントー地方」</span>
+		</p>
+	</div>
+
+	<h3><a href="http://www.city.hamamatsu-szo.ed.jp/oiwake-e/index.html">浜松市立追分小学校ホームページリニューアル</a></h3>
+	<p>
+		2015年に静岡大学情報学部「地域連携推進室」によるボランティア募集を受けて参加・制作を行い、2016年４月に公開されたものです
+		(<a href="http://www.inf.shizuoka.ac.jp/approach/area.html">詳細</a>)。
+		３グループでのコンペ形式で企画・制作を行い、自グループ案が採用されたものになります。グループで設計と実装を分業して、私は実装を担当しました。<br>
+		テキストサイト風味あふれる旧サイトから、スマートフォン表示対応のモダンなサイトに生まれ変わりました。
+		これには、学校が保護者への連絡チャネルとしてホームページを活用したいというニーズがあり、
+		多くの保護者がスマートフォンを利用しているという背景がありました。<br>
+		手軽にレスポンシブ対応するため、導入が容易なオリジナルBootstrapテーマの
+		「<strong><a href="http://honokak.osaka/">Honoka</a></strong>」を使用しました。
+	</p>
+	<div class="ss">
+		<p class="imagebox">
+			<img src="/img/oiwake-1.jpg" alt="追分小" >
+			<span class="caption">右上のボタンをタップすると</span>
+		</p>
+		<p class="imagebox">
+			<img src="/img/oiwake-2.jpg" alt="追分小　ハンバーガーメニュー">
+			<span class="caption">メニューが開きます</span>
+		</p>
+	</div>
+	
+	<h3><strong>「はままつポンポンまつり」ホームページ制作・運用</strong></h3>
+	<p>
+		2015年〜2016年、NPO法人・日本モータースポーツ振興会さんのイベント「はままつポンポンまつり」のホームページ制作・運用を行いました。
+		私自身も「はまポン」の実行委員会に加わり、協賛や出展内容の追加・変更の連絡を受けてホームページの更新を行いました。
+		<br>オリジナルBootstrapテーマの「<strong><a href="http://honokak.osaka/">Honoka</a></strong>」を使用しました。
+		<br>私の委員会退出後もページを作り変えているようで、
+		<a href="http://hamapon.web.fc2.com/index.html">現在のページ</a>は当時のものとは異なります。
+	</p>
+	<div class="ss">
+		<p class="imagebox">
+			<img src="/img/hamapon-1.jpg" alt="はまポンまつりトップページ">
+			<span class="caption">当時のトップページ</span>
+		</p>
+		<p class="imagebox">
+			<img src="/img/hamapon-2.jpg" alt="はまポンまつり出展ページ" style="width:360px;">
+			<span class="caption">当時の出展ページ</span>
+		</p>
+	</div>
+
 	・pokemap
 	・kyun
 	・2号館マップ
@@ -69,22 +162,39 @@
 			</p>
 		</li>
 			
-		</ul>
+	</ul>
+
+	<h2>他に公開しているもの</h2>
+	<ul>
+		<li>
+			<p>
+				ピアノアレンジの楽譜
+				<br><a href="./score/index.html">score and music</a>
+			</p>
+		</li>
+		<li>
+			<p>
+				浜松郷土研究会
+				<br><a href="./unagi/index.html">Hamamatsu city</a>
+			</p>
+		</li>
+		<li>
+			<p>
+				ドラえもんデータ
+				<br><a href="./dora/index.html">doraemon material</a>
+			</p>
+		</li>
+	</ul>			
+
+	<h2>ブログ</h2>
+	<ul>
+		<li><a href="https://suneo3476.hateblo.jp/">はてなブログ</a></li>
+		<li><a href="https://d.hatena.ne.jp/suneo3476z_tn">はてなダイアリー</a></li>
+	</ul>
 
 	<h2>連絡先</h2>
 	<p><a href="mailto:suneo3476@gmail.com">suneo3476＠gmail.com</a> までご連絡ください。</p>
-	
-	<ul>
-				<li><a href="https://suneo3476.hateblo.jp/">はてなブログ</a></li>
-				<li><a href="https://d.hatena.ne.jp/suneo3476z_tn">はてなダイアリー</a></li>
-			</ul>
-			<h2>コンテンツ</h2>
-			<ul>
-				<li><a href="./poke/index.html">poke map</a></li>
-				<li><a href="./score/index.html">score and music</a></li>
-				<li><a href="./unagi/index.html">Hamamatsu city</a></li>
-				<li>NEW! -> <a href="./dora/index.html">doraemon material</a></li>
-			</ul>			
+
 </div>
 
 </body>
