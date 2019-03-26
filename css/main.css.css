@@ -1,21 +1,28 @@
 /* line 1, ../scss/main.css.scss */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* line 6, ../scss/main.css.scss */
 body {
   font: 14px ubuntu, mplus1p, sans-serif;
   padding: 0;
   border: 0;
   margin: 0;
+  width: 100%;
 }
 
-/* line 8, ../scss/main.css.scss */
+/* line 14, ../scss/main.css.scss */
 .header {
   background-color: white;
 }
-/* line 10, ../scss/main.css.scss */
+/* line 16, ../scss/main.css.scss */
 .header .menu {
   text-align: right;
 }
 
-/* line 15, ../scss/main.css.scss */
+/* line 21, ../scss/main.css.scss */
 .title {
   background-image: url("/img/title_bg.jpg");
   background-size: auto 255px;
@@ -26,55 +33,71 @@ body {
   padding-bottom: 50px;
   padding-right: 10px;
 }
-/* line 24, ../scss/main.css.scss */
+/* line 30, ../scss/main.css.scss */
 .title .portfolio_title {
   font-size: x-large;
   border-bottom: solid 3px white;
 }
 
-/* line 30, ../scss/main.css.scss */
+/* line 36, ../scss/main.css.scss */
 .body {
   background-color: white;
   padding: 24px;
 }
-/* line 33, ../scss/main.css.scss */
+/* line 39, ../scss/main.css.scss */
 .body p {
   margin-left: 16px;
 }
-/* line 36, ../scss/main.css.scss */
+/* line 42, ../scss/main.css.scss */
 .body ul {
   margin-left: 24px;
   border: 0;
   padding: 0;
 }
-/* line 41, ../scss/main.css.scss */
+/* line 47, ../scss/main.css.scss */
 .body h2 {
   border-bottom: dotted 1px gray;
 }
-/* line 44, ../scss/main.css.scss */
+/* line 50, ../scss/main.css.scss */
 .body h3 {
   border-left: solid 4px gray;
   padding-left: 4px;
 }
-/* line 48, ../scss/main.css.scss */
+/* line 54, ../scss/main.css.scss */
 .body .ss {
   margin-left: 24px;
 }
-/* line 51, ../scss/main.css.scss */
+/* line 57, ../scss/main.css.scss */
 .body p.imagebox {
   display: inline-block;
   margin: 0px 3px 7px 0px;
 }
-/* line 54, ../scss/main.css.scss */
+/* line 60, ../scss/main.css.scss */
 .body p.imagebox img {
   display: block;
   margin: 0px 0px 3px 0px;
   width: 240px;
   height: 240px;
 }
-/* line 60, ../scss/main.css.scss */
+/* line 66, ../scss/main.css.scss */
 .body p.imagebox span.caption {
   font-size: 0.9em;
   text-align: center;
   color: gray;
+}
+/* line 72, ../scss/main.css.scss */
+.body .tag {
+  border-radius: 0.4em;
+  -webkit-border-radius: 0.4em;
+  -moz-border-radius: 0.4em;
+  background-color: lightseagreen;
+  color: white;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  padding-top: 0.15em;
+  padding-bottom: 0.15em;
+}
+/* line 83, ../scss/main.css.scss */
+.body #intro a {
+  text-decoration: none;
 }

@@ -7,40 +7,65 @@
 	<link rel="stylesheet" type="text/css" href="./css/main.css.css">
 <body>
 
+<div class="container">
+
 <!-- ヘッダメニュー -->
 <div class="header">
 <div class="menu">
-	<a href="#blogs">#自己紹介</a>
-	<a href="#workds">#スキルと制作物</a>
-	<a href="#workds">#SNS</a>
-	<a href="#workds">#連絡先</a>
-</div>
+	<a href="#intro">#自己紹介</a>
+	<a href="#works">#スキルと制作物</a>
+	<a href="#sns">#SNS</a>
+	<a href="#contacts">#連絡先</a>
 </div>
 
+</div>
 <!-- タイトル -->
 <div class="title">
 	<!-- このタイトルにはアンダーライン -->
 	<div>
-		<span class="portfolio_title">TotoumiSuneo's Portfolio</span> 
+		<span class="portfolio_title">suneo3476's Portfolio</span> 
 	</div>
 	<!-- サブテキストは小さく -->
 	<div>
-		<span class="portfolio_subtext">情報系学生TotoumiSuneo'sのポートフォリオサイトです</span>
+		<span class="portfolio_subtext">suneo3476のポートフォリオサイトです</span>
 	</div>
 </div>
 
 <!-- 本文（自己紹介・スキルと制作物・SNS・連絡先） -->
 <div class="body">
-	<h2>自己紹介</h2>
-	<p>
-		エンジニアを志望する浜松の情報系大学院生です。<br>
-		Webで動くものに興味があります。<br>
-		特にJavascriptに親しみがあるので、業務では <strong>React</strong> や <strong>Vue</strong> といったフロントエンドのフレームワークを扱ってみたいです。
-	</p>
+	<h2 id="intro">自己紹介</h2>
+	<div>
+		<p class="imagebox" style="float:left">
+			<img src="/img/profile_bg.jpg" alt="カテゴリページ" style="width:180px;height:180px;margin-right:1em">
+			<span class="caption">以前モデルやってました</span>
+		</p>
+		<p>
+			<a href="https://twitter.com/suneo3476Pro">
+				<span class="tag"><strong>Twitter:@suneo3476Pro</strong></span><br>
+			</a>
+			<a href="https://instagram.com/suneo3476">
+				<span class="tag"><strong>Instagram:suneo3476</strong></span><br>
+			</a>
+			<strong>藤森　雅人（Fujimori Masato）</strong>👩<br>
+			Webエンジニアを志望する浜松の情報系大学院生です。<br>
+			Webで動くものを作ることに興味があります。<br>
+			特にJavascriptに親しみがあるので、業務では<strong>React</strong>や
+			<strong>Vue</strong> といったフロントエンドのフレームワークを扱ってみたいです。
+			バックエンドに疎いので、<strong>PHP</strong>や<strong>Node.js</strong>にも手を出してみたいです。
+		</p>
+	</div>
 
-	<h2>スキルと制作物</h2>
+	<h2 id="works" style="clear:left">スキルと制作物</h2>
 
 	<h3><strong>Wikipediaライクな教科書システムの実装</strong></h3>
+	<div>
+		<span class="tag"><strong>CentOS 7</strong></span>
+		<span class="tag"><strong>Apache2</strong></span>
+		<span class="tag"><strong>MySQL</strong></span>
+		<span class="tag"><strong>PHP</strong></span>
+		<span class="tag"><strong>MediaWiki</strong></span>
+		<span class="tag"><strong>JavaScript</strong></span>
+	</div>
 	<p>
 		学部卒業研究で作ったものです。紙の教科書みたいに最初から最後まで流れのある編纂物とは違った、
 		ニコニコ大百科のような教科書があったら面白いよね、という発想で作ったものです。<br>
@@ -48,7 +73,7 @@
 		WikiエンジンはWikipediaが採用している <strong>MediaWiki</strong> です。
 		LAMP構成で、必要に応じてフロントエンドを <strong>JavaScript</strong> を書いてました。
 		<br>余談として、学術的新規性と言われると詰まることもあり個人的には黒歴史なんですが、
-		後にある後輩が当時「これみたいなものを作りたい」とWebエンジニアを志したと語ってくれたのを聞いて、
+		後にある後輩が当時「これみたいなものを作りたい」とWebエンジニアを志したと語ってくれて、
 		けして無駄ではなかったなと思いました。
 	</p>
 	<div class="ss">
@@ -63,6 +88,10 @@
 	</div>
 
 	<h3><strong><a href="https://suneo3476.github.io/poke">ポケモンBGMのYoutube検索を支援するタウンマップ型アプリ</a></strong></h3>
+	<div>
+			<span class="tag"><strong>Processing</strong></span>
+			<span class="tag"><strong>JavaScript</strong></span>
+	</div>
 	<p>
 		2015年作。ゲームのBGMを耳コピしてピアノアレンジして演奏するのが趣味の私にとって、
 		原曲の確認作業は必須で、またアレンジ作品を視聴するのにもYoutubeを利用していました。
@@ -83,16 +112,20 @@
 	</p>
 	<div class="ss">
 		<p class="imagebox">
-			<img src="/img/poke-1.jpg" alt="ダイヤモンド・パールの「シンオウ地方」" style="height:240px;width:360px">
-			<span class="caption">いわゆる「タグ」のページ</span>
+			<img src="/img/poke-1.jpg" alt="ダイヤモンド・パールの「シンオウ地方」" style="height:300px;width:380px">
+			<span class="caption">ダイヤモンド・パールの「シンオウ地方」</span>
 		</p>
 		<p class="imagebox">
-			<img src="/img/poke-2.jpg" alt="カードページ" style="height:240px;width:720px">
+			<img src="/img/poke-2.jpg" alt="ートゴールド・ソウルシルバーの「ジョウト地方」「カントー地方」" style="height:240px;width:720px">
 			<span class="caption">ハートゴールド・ソウルシルバーの「ジョウト地方」「カントー地方」</span>
 		</p>
 	</div>
 
 	<h3><a href="http://www.city.hamamatsu-szo.ed.jp/oiwake-e/index.html">浜松市立追分小学校ホームページリニューアル</a></h3>
+	<div>
+		<span class="tag"><strong>静的サイト</strong></span>
+		<span class="tag"><strong>レスポンシブ</strong></span>
+	</div>
 	<p>
 		2015年に静岡大学情報学部「地域連携推進室」によるボランティア募集を受けて参加・制作を行い、2016年４月に公開されたものです
 		(<a href="http://www.inf.shizuoka.ac.jp/approach/area.html">詳細</a>)。
@@ -115,6 +148,10 @@
 	</div>
 	
 	<h3><strong>「はままつポンポンまつり」ホームページ制作・運用</strong></h3>
+	<div>
+		<span class="tag"><strong>静的サイト</strong></span>
+		<span class="tag"><strong>レスポンシブ</strong></span>
+	</div>
 	<p>
 		2015年〜2016年、NPO法人・日本モータースポーツ振興会さんのイベント「はままつポンポンまつり」のホームページ制作・運用を行いました。
 		私自身も「はまポン」の実行委員会に加わり、協賛や出展内容の追加・変更の連絡を受けてホームページの更新を行いました。
@@ -132,35 +169,6 @@
 			<span class="caption">当時の出展ページ</span>
 		</p>
 	</div>
-
-	<h2>SNS</h2>
-	<ul>
-		<li>
-			<p>
-				<strong><a href="https://twitter.com/suneo3476Pro">Twitter:@suneo3476Pro</a></strong><br>
-				趣味アカウントと称しながら一番のWeb開発技術の情報源になっています。エンジニアとの交流や情報交換に活用しています。
-			</p>
-		</li>
-		<li>
-			<p>
-				<strong><a href="https://facebook.com/fujimorim">Facebook</a></strong><br>
-				地元・浜松〜静岡エリアのエンジニアの方々や、セキュリティ・キャンプ全国大会を通じてつながった人達が多いため、地元の勉強会情報と情報セキュリティ関連の情報が流れ込んできます。
-			</p>
-		</li>
-		<li>
-			<p>
-				<strong><a href="https://github.com/suneo3476">Github:suneo3476</a></strong><br>
-				先に言っておくとOSSコミット経験などはありません。当サイトの運用が主目的と言っても過言ではないでしょう。せいぜい制作物置き場に留まっています。当サイトの制作物コーナーから辿ったほうが早いでしょう。
-			</p>
-		</li>
-		<li>
-			<p>
-				<strong><a href="https://speakderdeck.com/suneo3476">SpeakderDeck:suneo3476</a></strong><br>
-				SlideShareよりイカしてるのでこっちを使っています。すべてではありませんが、大学LTや自主ゼミの発表資料が多めです。
-			</p>
-		</li>
-			
-	</ul>
 
 	<h2>他に公開しているもの</h2>
 	<ul>
@@ -184,14 +192,50 @@
 		</li>
 	</ul>			
 
-	<h2>ブログ</h2>
+	<h2 id="sns">SNS</h2>
 	<ul>
-		<li><a href="https://suneo3476.hateblo.jp/">はてなブログ</a></li>
-		<li><a href="https://d.hatena.ne.jp/suneo3476z_tn">はてなダイアリー</a></li>
+		<li>
+			<p>
+				<strong><a href="https://qiita.com/suneo3476">Qiita:suneo3476</a></strong><br>
+				技術記事はここに投下するようにしています。
+			</p>
+		</li>
+		<li>
+			<p>
+				<strong><a href="https://github.com/suneo3476">Github:suneo3476</a></strong><br>
+				先に言っておくとOSSコミット経験などはありません。当サイトの運用が主目的と言っても過言ではないでしょう。せいぜい制作物置き場に留まっています。当サイトの制作物コーナーから辿ったほうが早いでしょう。
+			</p>
+		</li>
+		<li>
+			<p>
+				<strong><a href="https://speakerdeck.com/suneo3476">SpeakderDeck:suneo3476</a></strong><br>
+				SlideShareよりイカしてるのでこっちを使っています。すべてではありませんが、大学LTや自主ゼミの発表資料が多めです。
+			</p>
+		</li>
+		<li>
+			<p>
+				<strong><a href="https://twitter.com/suneo3476Pro">Twitter:@suneo3476Pro</a></strong><br>
+				趣味アカウントと称しながら一番のWeb開発技術の情報源になっています。エンジニアとの交流や情報交換に活用しています。
+			</p>
+		</li>
+		<li>
+			<p>
+				<strong><a href="https://facebook.com/fujimorim">Facebook</a></strong><br>
+				地元・浜松〜静岡エリアのエンジニアの方々や、セキュリティ・キャンプ全国大会を通じてつながった人達が多いため、地元の勉強会情報と情報セキュリティ関連の情報が流れ込んできます。
+			</p>
+		</li>
+		<li>
+			<p>
+				<a href="https://suneo3476.hateblo.jp/">はてなブログ</a>
+				<br>学術や趣味や批評など書き捨てるブログです。
+			</p>			
+		</li>
 	</ul>
 
-	<h2>連絡先</h2>
+	<h2 id="contacts">連絡先</h2>
 	<p><a href="mailto:suneo3476@gmail.com">suneo3476＠gmail.com</a> までご連絡ください。</p>
+
+</div>
 
 </div>
 
