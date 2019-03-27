@@ -57,35 +57,37 @@ body {
 /* line 47, ../scss/main.css.scss */
 .body h2 {
   border-bottom: dotted 1px gray;
+  margin-top: 2em;
 }
-/* line 50, ../scss/main.css.scss */
+/* line 51, ../scss/main.css.scss */
 .body h3 {
   border-left: solid 4px gray;
   padding-left: 4px;
+  margin-top: 2em;
 }
-/* line 54, ../scss/main.css.scss */
+/* line 56, ../scss/main.css.scss */
 .body .ss {
   margin-left: 24px;
 }
-/* line 57, ../scss/main.css.scss */
+/* line 59, ../scss/main.css.scss */
 .body p.imagebox {
   display: inline-block;
   margin: 0px 3px 7px 0px;
 }
-/* line 60, ../scss/main.css.scss */
+/* line 62, ../scss/main.css.scss */
 .body p.imagebox img {
   display: block;
   margin: 0px 0px 3px 0px;
   width: 240px;
   height: 240px;
 }
-/* line 66, ../scss/main.css.scss */
+/* line 68, ../scss/main.css.scss */
 .body p.imagebox span.caption {
   font-size: 0.9em;
   text-align: center;
   color: gray;
 }
-/* line 72, ../scss/main.css.scss */
+/* line 74, ../scss/main.css.scss */
 .body .tag {
   border-radius: 0.4em;
   -webkit-border-radius: 0.4em;
@@ -97,7 +99,7 @@ body {
   padding-top: 0.15em;
   padding-bottom: 0.15em;
 }
-/* line 83, ../scss/main.css.scss */
+/* line 85, ../scss/main.css.scss */
 .body #intro a {
   text-decoration: none;
 }
