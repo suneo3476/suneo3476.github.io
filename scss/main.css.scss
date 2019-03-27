@@ -33,56 +33,58 @@ body {
     }
 }
 
+p{
+    margin-left: 16px;
+}
+ul{
+    margin-left: 24px;
+    border: 0;
+    padding: 0;
+}
+h2{
+    border-bottom: dotted 1px gray;
+    margin-top:2em;
+}
+h3{
+    border-left: solid 4px gray;
+    padding-left: 4px;
+    margin-top:2em;
+}
+
+p.imagebox{
+    display: inline-block;
+    margin: 0px 3px 7px 0px;
+    img{
+        display:block;
+        margin: 0px 0px 3px 0px;
+        width:240px;
+        height:240px;
+    }
+    span.caption{
+        font-size: 0.9em;
+        text-align:center;
+        color:gray;
+    }
+}
+
 .body{
     background-color: white;
     padding: 24px;
-    p{
-        margin-left: 16px;
-    }
-    ul{
-        margin-left: 24px;
-        border: 0;
-        padding: 0;
-    }
-    h2{
-        border-bottom: dotted 1px gray;
-        margin-top:2em;
-    }
-    h3{
-        border-left: solid 4px gray;
-        padding-left: 4px;
-        margin-top:2em;
-    }
-    .ss{
-        margin-left: 24px;
-    }
-    p.imagebox{
-        display: inline-block;
-        margin: 0px 3px 7px 0px;
-        img{
-            display:block;
-            margin: 0px 0px 3px 0px;
-            width:240px;
-            height:240px;
-        }
-        span.caption{
-            font-size: 0.9em;
-            text-align:center;
-            color:gray;
-        }
-    }
-    .tag{
-        border-radius: 0.4em;
-        -webkit-border-radius: 0.4em;
-        -moz-border-radius: 0.4em;
-        background-color:lightseagreen;
-        color:white;
-        padding-left:0.3em;
-        padding-right:0.3em;
-        padding-top:0.15em;
-        padding-bottom:0.15em;
-    }
-    #intro a{
-        text-decoration: none;
-    }
+}
+#intro a{
+    text-decoration: none;
+}
+.ss{
+    margin-left: 24px;
+}
+.tag{
+    border-radius: 0.4em;
+    -webkit-border-radius: 0.4em;
+    -moz-border-radius: 0.4em;
+    background-color:lightseagreen;
+    color:white;
+    padding-left:0.3em;
+    padding-right:0.3em;
+    padding-top:0.15em;
+    padding-bottom:0.15em;
 }
