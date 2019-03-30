@@ -4,23 +4,11 @@
 	<title>アラートループ体験コーナー</title>
 	<style type="text/css">
 	</style>
+	<link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./css/main.css.css">
 </head>
-<body>
-    <script>
-    document.body.oncontextmenu =
-    function(){
-        alert('右クリック禁止です！');
-        return false;
-    }
-
-    function alertloop(){
-        while(true){
-            alert('アラートループ体験中');
-        }
-    }
-    </script>
-<div style="margin:2em;max-width:700px;margin-left:auto;margin-right:auto;max-width:600px;">
+    <body>
+        <div style="margin:2em;max-width:700px;margin-left:auto;margin-right:auto;max-width:600px;">
 <a href="index.html">ポートフォリオに戻る</a>
 <h2>アラートループ体験コーナー</h2>
 <h3>１　ブラウザ</h3>
@@ -54,7 +42,8 @@
     このJavaScriptには、ブラウザを操作するための命令があらかじめ用意されています。<br>
     その命令のひとつが<strong>「alert（アラート）」</strong>です。<br>
     alert命令は、主に、ウェブページを見ている人に対して、
-    なんらかの警告や注意、確認をうながすことを目的とした、小さなウィンドウを表示します。
+    なんらかの警告や注意、確認をうながすことを目的とした、小さなウィンドウを表示します。<br>
+    そのウィンドウを閉じるまで、メインウィンドウの操作は行えません。<br>
 </p>
 <p><strong><span class="tag">POINT</span>　alertはJavaScriptの命令のひとつで、小さなウィンドウを表示する。</strong></p>
 <p>
@@ -111,7 +100,7 @@
     もったいぶってもしょうがないので、これが<strong>「アラートループ」</strong>と言われているものです。<br>
     先程の右クリック禁止プログラムは、右クリック操作をするタイミングでalert命令をせよ、というものでしたが、
     このプログラムでは終了条件のないループ文にalert命令を書いているので、
-    <strong>常に（ユーザが何もしなくても）</strong>alert処理をせよ、という意味になります。<br>
+    <strong>常に（ユーザが何もしなくても）</strong>無限にalert処理をせよ、という意味になります。<br>
     これにより、いくら閉じても小窓が開き、メインウィンドウの操作ができなくなるのです。
 </p>
 <p><strong><span class="tag">POINT</span>　アラートループは、終了条件のないループ文にアラート命令を書けば作れる。</strong></p>
@@ -119,7 +108,7 @@
 <h3>休憩</h2>
 <p>
     アラートループは、言ってみれば止め方の分からない目覚まし時計で、迷惑なものです。<br>
-    止め方が分からない人にとっては止める術が分からないのですから。<br>
+    止め方が分からない人にとっては止める術がないのですから。<br>
     このページでは、迷惑な目覚まし時計の作り方を紹介しています。<br>
     かといって、このプログラムは機器に致命的な損害を与えるものでは到底ありえません。<br>
     これで警察に逮捕されることなんて現実にはありえないでしょう(笑)。<br>
@@ -141,6 +130,18 @@
     下の<strong>「アラートループ体験を開始する」</strong>ボタンをクリックすると始まります。
     <button onclick="alertloop()">アラートループ体験を開始する</button>
 </p>
-
 </div>
+<script src="./js/bootstrap.min.js"></script>
+<script>
+document.body.oncontextmenu =
+function(){
+    alert('右クリック禁止です！');
+    return false;
+}
+function alertloop(){
+    while(true){
+        alert('アラートループ体験中');
+    }
+}
+</script>    
 </body>
