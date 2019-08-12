@@ -1,0 +1,8 @@
+var user_details =  {
+  "screen_name" : "suneo3476Doc",
+  "location" : "(PLACE)\uFF71\uFF72\uFF7A\uFF9D:\u97F3\u697D\uFF7D\uFF80\uFF7C\uFF9E\uFF75 \uFF8D\uFF6F\uFF80\uFF9E:\u6765\u5BAE\u6885\u5712",
+  "full_name" : "\u3059\u306D\u304A\uD83C\uDFE1",
+  "bio" : "\u3088\u3044\u3053\u306F\u307E\u306D\u3057\u306A\u3044\u3067\u306D\u3000\u9759\u5927\u751F\u30D5\u30A9\u30ED\u30FC\u3069\u3046\u305E\u3000\u30A2\u30A4\u30B3\u30F3\u672C\u4EBA\n\u5199\u771F\u96C6Tumblr\uFF1Ahttps:\/\/t.co\/zznE4UzLd4",
+  "id" : "367850382",
+  "created_at" : "2011-09-04 17:33:49 +0000"
+}
