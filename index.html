@@ -301,6 +301,10 @@
 						同大学院　総合科学技術研究科情報学専攻　修了
 					</td>
 				</tr>
+				<tr>
+					<th>X</th>
+					<td><a href="https://x.com/totom_saku" target="_blank">@totom_saku</a></td>
+				</tr>
 			</table>
 		</section>
 
@@ -330,8 +334,39 @@
 
 			<div class="work">
 				<div class="work-head">
+					<h3>「乗馬歴アプリ」— 乗馬レッスン記録ビューワ</h3>
+					<span class="badge-closed">公開不可</span>
+				</div>
+				<div class="work-body">
+					<div class="tags">
+						<span>Vue.js</span><span>Vuetify</span><span>Google Apps Script</span><span>GitHub Pages</span>
+					</div>
+					<p>
+						趣味の乗馬のレッスン記録を閲覧できるWebアプリです。
+						記録は最初、専用ノートに手書きしていましたが、「この馬に乗るのは何回目？」「このレッスンは何回目？」の手計算が
+						面倒になりスプレッドシート管理に移行。さらに人に趣味を話すとき、スプレッドシートのリンク共有では野暮ったいので、
+						パッと見せられるWebアプリにしました。
+						通算の鞍数・騎乗時間・出費の集計を表示するほか、時間・担当・レッスン名・馬名でレッスン記録を絞り込めます。
+						スプレッドシートを Google Apps Script で Web API 化し、フロントエンド（Vue.js + Vuetify）から
+						Fetch API で JSON を取得する構成で、GitHub Pages で公開していました。
+						設計をしないまま作り始めた結果、作業の終わりが曖昧になって開発が停滞するという反省もあり、
+						「面倒でも設計で終わりを明確にする」「開発の記録をつける」という教訓を得ました。
+						この開発について乗馬記録の実物を交えて<a href="https://docs.google.com/presentation/d/1efbkNhjMF-MKgIF3ULn5ukHqRw58dOIida6BElrXiX4/edit?usp=sharing" target="_blank">LT発表</a>をしています。
+						※データ元のスプレッドシートとAPIが現存しないため、現在アプリは動作しません。
+					</p>
+					<div class="shots">
+						<figure>
+							<img src="./img/nrca-1.jpg" alt="乗馬歴アプリの画面">
+							<figcaption>通算の集計・絞り込み・レッスン記録の一覧</figcaption>
+						</figure>
+					</div>
+				</div>
+			</div>
+
+			<div class="work">
+				<div class="work-head">
 					<h3>Wikipediaライクな教科書システムの実装</h3>
-					<span class="badge-closed">公開終了</span>
+					<span class="badge-closed">公開不可</span>
 				</div>
 				<div class="work-body">
 					<div class="tags">
@@ -401,7 +436,7 @@
 			<div class="work">
 				<div class="work-head">
 					<h3>浜松市立追分小学校ホームページリニューアル</h3>
-					<span class="badge-closed">公開終了</span>
+					<span class="badge-closed">公開不可</span>
 				</div>
 				<div class="work-body">
 					<div class="tags">
@@ -432,7 +467,7 @@
 			<div class="work">
 				<div class="work-head">
 					<h3>「はままつポンポンまつり」ホームページ制作・運用</h3>
-					<span class="badge-closed">公開終了</span>
+					<span class="badge-closed">公開不可</span>
 				</div>
 				<div class="work-body">
 					<div class="tags">
@@ -463,7 +498,7 @@
 			<h2 class="section-bar">趣味</h2>
 			<ul class="hobby-list">
 				<li>
-					<div class="h-title">🐴 <a href="./umalog/" target="_blank">乗馬ログ</a></div>
+					<div class="h-title">🐴 <a href="./umalog/" target="_blank">乗馬体験記</a></div>
 					<div class="h-desc">乗馬体験の記録です</div>
 				</li>
 				<li>
@@ -490,7 +525,6 @@
 					<li><a href="https://qiita.com/suneo3476" target="_blank">Qiita</a></li>
 					<li><a href="https://speakerdeck.com/suneo3476" target="_blank">Speaker Deck</a></li>
 					<li><a href="https://github.com/suneo3476" target="_blank">GitHub</a></li>
-					<li><a href="https://x.com/totom_saku" target="_blank">X (@totom_saku)</a></li>
 				</ul>
 			</div>
 			<div class="link-group">
