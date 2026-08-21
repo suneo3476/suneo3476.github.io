@@ -267,6 +267,7 @@
 
 	<nav class="tabbar" id="tabbar">
 		<button class="tab" data-tab="profile">プロフィール</button>
+		<button class="tab" data-tab="career">経歴・スキル</button>
 		<button class="tab" data-tab="works">制作物</button>
 		<button class="tab" data-tab="hobby">趣味</button>
 		<button class="tab" data-tab="links">リンク</button>
@@ -306,6 +307,109 @@
 					<td><a href="https://x.com/totom_saku" target="_blank">@totom_saku</a></td>
 				</tr>
 			</table>
+		</section>
+
+		<section class="panel" id="panel-career">
+			<h2 class="section-bar">経歴・スキル</h2>
+
+			<p>
+				2020年から受託ソフトウェア開発企業にて、大手楽器メーカー向けのエンジニアリング技術支援に従事しています。
+				前半約3年間は動画制作WebサービスのフルスタックWeb開発（Vue.js / Node.js / AWS）を担当し、
+				2023年からは立体音響コアライブラリを Unity・Unreal Engine・Wwise・CRI ADX の4製品で利用可能にする
+				ネイティブSDK／プラグインの開発・保守・リリースを担当しています。
+				新しい技術のキャッチアップと製品実装を得意とし、近年は生成AIを組み込んだ開発プロセスの設計により、
+				品質と生産性の両立を推進しています。
+			</p>
+
+			<div class="work">
+				<div class="work-head">
+					<h3>2023年4月〜現在 ／ 立体音響ライブラリのクロスプラットフォーム展開支援</h3>
+				</div>
+				<div class="work-body">
+					<div class="tags">
+						<span>C/C++</span><span>C#</span><span>Blueprint</span><span>Python</span><span>Unity</span><span>Unreal Engine</span><span>Wwise</span><span>CRI ADX</span>
+					</div>
+					<p>
+						C++製の立体音響コアライブラリを、ゲームエンジン（Unity / Unreal Engine）および
+						サウンドミドルウェア（Wwise / CRI ADX）上で利用可能にするネイティブプラグイン・SDKの
+						開発・保守・リリースを担当。対象プラットフォームは Windows / macOS / iOS / Android /
+						VR（Meta Quest 2）/ 家庭用ゲーム機に及びます。
+					</p>
+					<ul>
+						<li>社内に経験者がいない中、未経験から Unreal Engine 開発を習得し、約1年でプラグインとデモアプリを製品化。以降UE領域を一貫して単独で主担当</li>
+						<li>信号処理の最適化（手書きSIMD、ARM64/NEON移植）と、性能リグレッションを検出する処理時間計測テストの精度改善（μ秒→ナノ秒）</li>
+						<li>出力波形一致検証の高次アンビソニックス（5次・42ch）対応への拡張、参照データ生成CLIの新規実装とユニットテストへの統合</li>
+						<li>家庭用ゲーム機向けセキュリティ要件への適合検証を単独で設計・構築。静的解析・実機での全API網羅テスト・違反再現による妥当性確認という多層検証を約3週間で確立し、テスト仕様書化</li>
+						<li>AIコードレビューの品質統制を主導。レビュー観点をルールID付き指示ファイルとして体系化し、対照実験で効果を確認した上で開発フローへ導入</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="work">
+				<div class="work-head">
+					<h3>2020年7月〜2023年3月 ／ 動画制作Webサービス開発</h3>
+				</div>
+				<div class="work-body">
+					<div class="tags">
+						<span>JavaScript</span><span>Vue.js</span><span>Vuetify</span><span>Node.js</span><span>AWS</span>
+					</div>
+					<p>
+						動画生成ツール・BGM自動生成ツールを基盤とした動画制作Webサービスと、
+						動画生成機能をAPIとして提供するWebサービスのフルスタック開発を担当。
+					</p>
+					<ul>
+						<li>AWSサーバーレス構成（API Gateway・Lambda・DynamoDB・StepFunctions 等）による商用サービスの構築・安定運用</li>
+						<li>動画生成APIの配信・ダッシュボード管理を行う REST API サービスのフルスタック開発（主担当）</li>
+						<li>NP掛け払い・SoftBankペイメントサービスの決済連携を含む機能を実装し、月次リリースを継続</li>
+					</ul>
+				</div>
+			</div>
+
+			<h2 class="section-bar">技術スタック</h2>
+			<table class="spec">
+				<tr>
+					<th>言語</th>
+					<td>
+						C/C++（製品プラグインの設計・実装・最適化）／
+						C#（Unityプラグイン・テストツールの設計・実装）／
+						JavaScript（Vue.js / Node.js によるフルスタック開発）／
+						Blueprint（Unreal Engine アプリの設計・実装）／
+						Python（検証・自動化スクリプト）
+					</td>
+				</tr>
+				<tr>
+					<th>エンジン・MW</th>
+					<td>
+						Unity（プラグイン開発、batchmodeビルド、テストアプリ開発）／
+						Unreal Engine（C++/Blueprintによるプラグイン開発、エンジンソース調査）／
+						Wwise（プラグインのビルド・保守）／
+						CRI ADX（組込み用ネイティブライブラリのビルド・テスト・リリース運用）
+					</td>
+				</tr>
+				<tr>
+					<th>クラウド</th>
+					<td>AWS（サーバーレス構成の設計・構築）</td>
+				</tr>
+				<tr>
+					<th>開発支援</th>
+					<td>Git / GitHub、Claude Code、GitHub Copilot（AIレビュー・エージェント駆動開発を含む開発フローの設計・運用）</td>
+				</tr>
+				<tr>
+					<th>資格</th>
+					<td>応用情報技術者試験（2022年10月合格）</td>
+				</tr>
+			</table>
+
+			<h2 class="section-bar" style="margin-top:16px">社外活動・自己研鑽</h2>
+			<ul>
+				<li>技術書輪読会・LT会を社内有志で企画・運営</li>
+				<li>JAWS-UG浜松支部など地域技術コミュニティに参加し、Claude AI によるアプリ開発事例の報告で2回登壇（2025年）</li>
+				<li>労働時間計算のChrome拡張機能や会議室予約タイムライン確認サイトを開発して社内公開。個人ではローカルの画像・動画をブラウザで閲覧・整理するアプリ「yoropiku」をWebで公開</li>
+			</ul>
+
+			<p style="color:#777;font-size:12px">
+				詳細な職務経歴書は<a href="mailto:suneo3476@gmail.com">ご連絡</a>いただければお送りします。
+			</p>
 		</section>
 
 		<section class="panel" id="panel-works">
