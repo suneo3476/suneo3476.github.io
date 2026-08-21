@@ -6,522 +6,544 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Fujimori Saku | Portfolio</title>
 	<link rel="icon" href="./favicon.ico">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 	<style>
 		:root {
-			--bg: #fff9f2;
-			--ink: #46403a;
-			--ink-soft: #857c72;
-			--card: #ffffff;
-			--line: #f0e6d8;
-			--accent: #ff8a5c;
-			--accent-soft: #ffe3d5;
-			--teal: #2ec4b6;
-			--teal-soft: #d9f6f3;
-			--purple: #9b8cff;
-			--purple-soft: #e9e5ff;
-			--radius: 20px;
-			--shadow: 0 6px 24px rgba(120, 90, 60, .08);
+			--accent: #4a7dbd;
+			--accent-light: #7ba7d9;
+			--link: #0044cc;
+			--border: #b9b9b9;
 		}
 
 		* { box-sizing: border-box; }
 
 		body {
 			margin: 0;
-			background: var(--bg);
-			color: var(--ink);
-			font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
-			font-size: 15.5px;
-			line-height: 1.9;
-			-webkit-font-smoothing: antialiased;
+			background: #dcdcdc;
+			color: #333;
+			font-family: "Hiragino Kaku Gothic ProN", "Meiryo", "MS PGothic", sans-serif;
+			font-size: 13px;
+			line-height: 1.8;
 		}
 
-		h1, h2, h3, .nav, .pill {
-			font-family: "M PLUS Rounded 1c", "Noto Sans JP", sans-serif;
-		}
-
-		a { color: var(--teal); text-decoration: none; }
+		a { color: var(--link); text-decoration: none; }
 		a:hover { text-decoration: underline; }
 
-		/* ---------- nav ---------- */
-		.nav {
-			position: sticky;
-			top: 0;
-			z-index: 10;
-			background: rgba(255, 249, 242, .85);
-			backdrop-filter: blur(10px);
-			border-bottom: 1px solid var(--line);
+		/* ---------- header ---------- */
+		.site-header {
+			background: linear-gradient(#3b3b3b, #222);
+			border-bottom: 3px solid #111;
+			color: #fff;
+			padding: 10px 0 8px;
 		}
-		.nav-inner {
+		.site-header .inner {
 			max-width: 860px;
 			margin: 0 auto;
-			padding: 10px 20px;
+			padding: 0 14px;
 			display: flex;
-			align-items: center;
-			gap: 6px;
-			overflow-x: auto;
+			align-items: baseline;
+			gap: 12px;
 		}
-		.nav-name {
-			font-weight: 800;
-			margin-right: auto;
-			white-space: nowrap;
-		}
-		.nav a {
-			color: var(--ink-soft);
-			font-weight: 700;
-			font-size: .85rem;
-			padding: 6px 12px;
-			border-radius: 999px;
-			white-space: nowrap;
-		}
-		.nav a:hover {
-			background: var(--accent-soft);
-			color: var(--ink);
-			text-decoration: none;
-		}
-
-		/* ---------- hero ---------- */
-		.hero {
-			position: relative;
-			overflow: hidden;
-			text-align: center;
-			padding: 72px 20px 64px;
-		}
-		.hero::before, .hero::after {
-			content: "";
-			position: absolute;
-			border-radius: 50%;
-			filter: blur(60px);
-			opacity: .55;
-			z-index: 0;
-		}
-		.hero::before {
-			width: 340px; height: 340px;
-			background: var(--accent-soft);
-			top: -80px; left: -60px;
-		}
-		.hero::after {
-			width: 300px; height: 300px;
-			background: var(--teal-soft);
-			bottom: -100px; right: -40px;
-		}
-		.hero > * { position: relative; z-index: 1; }
-		.hero img {
-			width: 132px; height: 132px;
-			border-radius: 50%;
-			object-fit: cover;
-			border: 5px solid #fff;
-			box-shadow: var(--shadow);
-		}
-		.hero h1 {
-			margin: 18px 0 4px;
-			font-size: 2rem;
-			font-weight: 800;
+		.site-header .logo {
+			font-size: 22px;
+			font-weight: bold;
 			letter-spacing: .02em;
 		}
-		.hero p {
-			margin: 0;
-			color: var(--ink-soft);
-			font-weight: 500;
+		.site-header .tagline {
+			color: #bbb;
+			font-size: 11px;
 		}
 
-		/* ---------- layout ---------- */
-		main {
+		/* ---------- tabs ---------- */
+		.tabbar {
 			max-width: 860px;
-			margin: 0 auto;
-			padding: 0 20px 80px;
-		}
-		section { margin-top: 56px; }
-		h2 {
-			font-size: 1.45rem;
-			font-weight: 800;
-			margin: 0 0 20px;
+			margin: 14px auto 0;
+			padding: 0 14px;
 			display: flex;
-			align-items: center;
-			gap: 10px;
+			gap: 3px;
+			flex-wrap: wrap;
 		}
-		h2 .emoji {
-			display: inline-grid;
-			place-items: center;
-			width: 40px; height: 40px;
-			background: var(--card);
-			border-radius: 14px;
-			box-shadow: var(--shadow);
-			font-size: 1.1rem;
+		.tab {
+			appearance: none;
+			cursor: pointer;
+			font-family: inherit;
+			font-size: 13px;
+			font-weight: bold;
+			color: #444;
+			padding: 6px 18px 5px;
+			background: linear-gradient(#ffffff, #d8d8d8);
+			border: 1px solid #999;
+			border-bottom: none;
+			border-radius: 5px 5px 0 0;
+			position: relative;
+			top: 1px;
+		}
+		.tab:hover { background: linear-gradient(#ffffff, #e9e9e9); }
+		.tab.active {
+			color: #fff;
+			border-color: rgba(0,0,0,.25);
+			background: linear-gradient(var(--accent-light), var(--accent));
 		}
 
-		.card {
-			background: var(--card);
-			border-radius: var(--radius);
-			box-shadow: var(--shadow);
-			padding: 26px 28px;
+		/* ---------- content frame ---------- */
+		.frame {
+			max-width: 860px;
+			margin: 0 auto 30px;
+			padding: 0 14px;
+		}
+		.panel {
+			display: none;
+			background: #fff;
+			border: 1px solid #999;
+			padding: 18px 20px 24px;
+		}
+		.panel.active { display: block; }
+
+		.section-bar {
+			background: linear-gradient(#fdfdfd, #e4e4e4);
+			border: 1px solid #ccc;
+			border-left: 6px solid var(--accent);
+			font-size: 15px;
+			font-weight: bold;
+			padding: 6px 12px;
+			margin: 0 0 16px;
 		}
 
 		/* ---------- profile ---------- */
-		.profile-lists {
+		.profile-head {
 			display: flex;
-			flex-wrap: wrap;
-			gap: 8px 28px;
-			margin: 0;
-			padding: 0;
-			list-style: none;
+			align-items: center;
+			gap: 18px;
+			margin-bottom: 16px;
 		}
-		.profile-lists li { min-width: 240px; }
-		.profile-lists .label {
-			display: inline-block;
-			font-size: .78rem;
-			font-weight: 700;
-			color: var(--ink-soft);
-			margin-right: .6em;
+		.profile-head img {
+			width: 96px; height: 96px;
+			object-fit: cover;
+			border: 1px solid var(--border);
+			padding: 2px;
+			background: #fff;
 		}
-		.edu {
-			margin: 18px 0 0;
-			padding: 14px 0 0;
-			border-top: 1px dashed var(--line);
-			list-style: none;
-			color: var(--ink-soft);
-			font-size: .92rem;
-		}
-		.edu li { padding-left: 1.2em; text-indent: -1.2em; }
-		.edu li::before { content: "🎓 "; }
+		.profile-head .name { font-size: 20px; font-weight: bold; }
+		.profile-head .yomi { color: #888; font-size: 11px; }
 
-		/* ---------- contents ---------- */
-		.tiles {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-			gap: 16px;
+		table.spec {
+			border-collapse: collapse;
+			width: 100%;
 		}
-		.tile {
-			display: block;
-			background: var(--card);
-			border-radius: var(--radius);
-			box-shadow: var(--shadow);
-			padding: 22px 24px;
-			color: var(--ink);
-			transition: transform .15s ease, box-shadow .15s ease;
+		table.spec th, table.spec td {
+			border: 1px solid #ccc;
+			padding: 7px 12px;
+			text-align: left;
+			vertical-align: top;
 		}
-		.tile:hover {
-			transform: translateY(-3px);
-			box-shadow: 0 10px 28px rgba(120, 90, 60, .14);
-			text-decoration: none;
+		table.spec th {
+			background: linear-gradient(#f8f8f8, #e8e8e8);
+			width: 7em;
+			font-weight: bold;
+			white-space: nowrap;
 		}
-		.tile .t-emoji { font-size: 1.6rem; }
-		.tile .t-title { font-weight: 800; margin-top: 6px; }
-		.tile .t-desc { color: var(--ink-soft); font-size: .88rem; }
 
 		/* ---------- works ---------- */
-		.work { margin-bottom: 24px; }
-		.work h3 {
-			margin: 0 0 10px;
-			font-size: 1.12rem;
-			font-weight: 800;
+		.work {
+			border: 1px solid #ccc;
+			margin-bottom: 16px;
 		}
-		.work h3 a { font-size: .9em; }
-		.pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
-		.pill {
-			font-size: .75rem;
-			font-weight: 700;
-			padding: 3px 12px;
-			border-radius: 999px;
-			background: var(--teal-soft);
-			color: #1a7a71;
-		}
-		.pill.alt { background: var(--purple-soft); color: #5d4fc4; }
-		.work p { margin: 0 0 14px; }
-		.shots {
+		.work-head {
 			display: flex;
-			flex-wrap: wrap;
-			gap: 14px;
+			align-items: center;
+			gap: 10px;
+			background: linear-gradient(#fbfbfb, #ececec);
+			border-bottom: 1px solid #ddd;
+			padding: 7px 12px;
 		}
-		.shots figure {
-			margin: 0;
-			flex: 1 1 240px;
-			max-width: 380px;
+		.work-head h3 { margin: 0; font-size: 14px; }
+		.badge-closed {
+			flex: none;
+			font-size: 10px;
+			color: #777;
+			background: #eee;
+			border: 1px solid #ccc;
+			padding: 0 6px;
 		}
+		.work-body { padding: 12px 14px 14px; }
+		.tags { margin-bottom: 10px; }
+		.tags span {
+			display: inline-block;
+			font-size: 11px;
+			background: #f4f4f4;
+			border: 1px solid #ccc;
+			padding: 0 8px;
+			margin: 0 3px 3px 0;
+		}
+		.work-body p { margin: 0 0 12px; }
+		.shots { display: flex; flex-wrap: wrap; gap: 12px; }
+		.shots figure { margin: 0; flex: 1 1 240px; max-width: 380px; }
 		.shots img {
 			width: 100%;
 			height: auto;
-			border-radius: 14px;
-			border: 1px solid var(--line);
+			border: 1px solid var(--border);
+			padding: 2px;
+			background: #fff;
 		}
 		.shots figcaption {
-			font-size: .8rem;
-			color: var(--ink-soft);
+			font-size: 11px;
+			color: #777;
 			text-align: center;
-			margin-top: 4px;
+			margin-top: 2px;
 		}
-		.badge-closed {
-			font-size: .72rem;
-			font-weight: 700;
-			color: var(--ink-soft);
-			background: var(--line);
-			border-radius: 999px;
-			padding: 2px 10px;
-			vertical-align: middle;
+
+		/* ---------- hobby ---------- */
+		ul.hobby-list { margin: 0; padding: 0; list-style: none; }
+		ul.hobby-list li {
+			border: 1px solid #ccc;
+			margin-bottom: 10px;
+			padding: 10px 14px;
+			background: #fdfdfd;
 		}
+		ul.hobby-list .h-title { font-weight: bold; font-size: 14px; }
+		ul.hobby-list .h-desc { color: #666; font-size: 12px; }
+		.wip { color: #999; font-size: 11px; margin-left: 6px; }
 
 		/* ---------- links ---------- */
-		.link-btns {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 10px;
+		.link-group { margin-bottom: 18px; }
+		.link-group h3 {
+			font-size: 13px;
+			margin: 0 0 8px;
+			padding: 4px 10px;
+			background: linear-gradient(#f8f8f8, #e8e8e8);
+			border: 1px solid #ccc;
+			border-left: 6px solid var(--accent);
 		}
-		.link-btns a {
-			background: var(--card);
-			border-radius: 999px;
-			box-shadow: var(--shadow);
-			padding: 9px 20px;
-			font-weight: 700;
-			font-size: .9rem;
-			color: var(--ink);
-			transition: transform .15s ease;
-		}
-		.link-btns a:hover {
-			transform: translateY(-2px);
-			text-decoration: none;
-			color: var(--accent);
-		}
+		.link-group ul { margin: 0; padding: 0 0 0 4px; list-style: none; }
+		.link-group li { padding: 2px 0; }
+		.link-group li::before { content: "▶ "; color: var(--accent); font-size: 10px; }
+		.link-desc { color: #888; font-size: 11px; margin-left: 8px; }
 
-		/* ---------- contact / footer ---------- */
-		.contact-card {
-			text-align: center;
-			padding: 36px 28px;
-		}
-		.contact-card .mail {
-			display: inline-block;
-			background: var(--accent);
-			color: #fff;
-			font-weight: 800;
-			border-radius: 999px;
-			padding: 11px 30px;
-			margin-top: 8px;
-			transition: transform .15s ease;
-		}
-		.contact-card .mail:hover {
-			transform: translateY(-2px);
-			text-decoration: none;
-		}
-		footer {
-			text-align: center;
-			color: var(--ink-soft);
-			font-size: .8rem;
+		/* ---------- contact ---------- */
+		.contact-box {
+			border: 1px solid #ccc;
+			background: #fdfdfd;
 			padding: 24px;
+			text-align: center;
+		}
+		.btn-mail {
+			display: inline-block;
+			font-size: 14px;
+			font-weight: bold;
+			color: #fff;
+			background: linear-gradient(var(--accent-light), var(--accent));
+			border: 1px solid #33608f;
+			border-radius: 4px;
+			padding: 8px 28px;
+			margin-top: 10px;
+			text-shadow: 0 1px 1px rgba(0,0,0,.3);
+		}
+		.btn-mail:hover { text-decoration: none; filter: brightness(1.06); }
+
+		/* ---------- footer ---------- */
+		.site-footer {
+			background: linear-gradient(#3b3b3b, #222);
+			color: #aaa;
+			font-size: 11px;
+			text-align: center;
+			padding: 12px;
 		}
 
 		@media (max-width: 560px) {
-			.hero { padding: 52px 20px 44px; }
-			.hero h1 { font-size: 1.6rem; }
-			.card { padding: 22px 20px; }
+			.tab { padding: 6px 10px 5px; font-size: 12px; }
+			.panel { padding: 14px 12px 18px; }
+			.profile-head { flex-direction: column; text-align: center; }
 		}
 	</style>
 </head>
 
 <body>
 
-	<nav class="nav">
-		<div class="nav-inner">
-			<span class="nav-name">Fujimori Saku</span>
-			<a href="#profile">プロフィール</a>
-			<a href="#contents">コンテンツ</a>
-			<a href="#works">制作物</a>
-			<a href="#links">リンク</a>
-			<a href="#contact">連絡先</a>
+	<header class="site-header">
+		<div class="inner">
+			<span class="logo">Fujimori Saku</span>
+			<span class="tagline">ポートフォリオサイト</span>
 		</div>
-	</nav>
-
-	<header class="hero">
-		<img src="./img/profile_bg.jpg" alt="プロフィール画像">
-		<h1>Fujimori Saku</h1>
-		<p>ポートフォリオサイトです 🐴🎹</p>
 	</header>
 
-	<main>
+	<nav class="tabbar" id="tabbar">
+		<button class="tab" data-tab="profile">プロフィール</button>
+		<button class="tab" data-tab="works">制作物</button>
+		<button class="tab" data-tab="hobby">趣味</button>
+		<button class="tab" data-tab="links">リンク</button>
+		<button class="tab" data-tab="contact">連絡先</button>
+	</nav>
 
-		<section id="profile">
-			<h2><span class="emoji">👋</span>プロフィール</h2>
-			<div class="card">
-				<ul class="profile-lists">
-					<li><span class="label">出身</span>静岡県浜松市</li>
-					<li><span class="label">趣味</span>乗馬、ボードゲーム、ボルダリング、ピアノ</li>
+	<main class="frame">
+
+		<section class="panel" id="panel-profile">
+			<h2 class="section-bar">プロフィール</h2>
+			<div class="profile-head">
+				<img src="./img/profile_bg.jpg" alt="プロフィール画像">
+				<div>
+					<div class="name">Fujimori Saku</div>
+					<div class="yomi">ふじもり・さく</div>
+				</div>
+			</div>
+			<table class="spec">
+				<tr>
+					<th>出身</th>
+					<td>静岡県浜松市</td>
+				</tr>
+				<tr>
+					<th>趣味</th>
+					<td>バンド活動（aikoコピー、オリジナル）、乗馬、ボードゲーム、ボルダリング、ピアノ</td>
+				</tr>
+				<tr>
+					<th>学歴</th>
+					<td>
+						浜松工業高等学校　情報技術科　卒業<br>
+						静岡大学　情報学部情報科学科　卒業<br>
+						同大学院　総合科学技術研究科情報学専攻　修了
+					</td>
+				</tr>
+			</table>
+		</section>
+
+		<section class="panel" id="panel-works">
+			<h2 class="section-bar">制作物</h2>
+
+			<div class="work">
+				<div class="work-head">
+					<h3>「七輪ライブラリー」— バンドのライブ歴閲覧アプリ
+						<a href="https://staging.d3taurdbn4ybcv.amplifyapp.com" target="_blank">↗</a></h3>
+				</div>
+				<div class="work-body">
+					<div class="tags">
+						<span>Next.js</span><span>JavaScript</span><span>AWS Amplify</span><span>Claude</span><span>Claude Code</span>
+					</div>
+					<p>
+						私がキーボードを担当しているコピーバンド「七輪（しちりん）」のライブ歴を閲覧できるWebアプリです。
+						2025年2月頃に、AIエージェントではなくプロンプトエンジニアリング主体で設計・実装・UIのブラッシュアップを行いました。
+						AIで解決できない不具合は、自分でエラーメッセージとソースコードを読んで修正しています。
+						開発の経緯については、AWS + JavaScript の勉強会で
+						<a href="https://speakerdeck.com/suneo3476/qi-lun-raiburari-claude-ai-dezuo-ru-next-dot-js-apuri" target="_blank">LT発表</a>を行いました。
+						現在（2026年8月）は Claude Code を使ったリメイク版の開発に挑戦しています。
+						リメイク版は Basic 認証付きで公開しているため、ご覧になりたい方は<a href="mailto:suneo3476@gmail.com">ご連絡ください</a>。
+					</p>
+				</div>
+			</div>
+
+			<div class="work">
+				<div class="work-head">
+					<h3>Wikipediaライクな教科書システムの実装</h3>
+					<span class="badge-closed">公開終了</span>
+				</div>
+				<div class="work-body">
+					<div class="tags">
+						<span>CentOS 7</span><span>Apache2</span><span>MySQL</span><span>PHP</span><span>MediaWiki</span><span>JavaScript</span>
+					</div>
+					<p>
+						学部卒業研究で作ったものです。紙の教科書みたいに最初から最後まで流れのある編纂物とは違った、
+						ニコニコ大百科のような教科書があったら面白いよね、という発想で作ったものです。
+						2014年度に大学のドメインで公開して、静岡大学情報学部情報社会学科で開講の科目「公共圏論」で実際に学生に触ってもらいました。
+						WikiエンジンはWikipediaが採用している MediaWiki です。
+						LAMP構成で構築し、必要に応じてフロントエンドを JavaScript で拡張しました。
+						研究としての新規性という点では課題が残りましたが、実際の授業で学生に使ってもらえたこと、
+						そして後に後輩のひとりが「これみたいなものを作りたい」とWebエンジニアを志すきっかけになったと聞けたことは、
+						作ってよかったと思える成果でした。
+					</p>
+					<div class="shots">
+						<figure>
+							<img src="./img/mwiki-1.png" alt="カテゴリページ">
+							<figcaption>いわゆる「タグ」のページ</figcaption>
+						</figure>
+						<figure>
+							<img src="./img/mwiki-2.png" alt="カードページ">
+							<figcaption>ひとつの記事は分量が決まっています</figcaption>
+						</figure>
+					</div>
+				</div>
+			</div>
+
+			<div class="work">
+				<div class="work-head">
+					<h3>ポケモンBGMのYoutube検索を支援するタウンマップ型アプリ
+						<a href="https://suneo3476.github.io/poke" target="_blank">↗</a></h3>
+				</div>
+				<div class="work-body">
+					<div class="tags">
+						<span>Processing</span><span>JavaScript</span>
+					</div>
+					<p>
+						2015年作。ゲーム音楽のピアノアレンジが趣味の私は
+						よくYoutubeで他人のアレンジを聴いていました。
+						しかし、マップの名前をいちいち憶えているわけでもなく、
+						アップロード者のつけたタイトルにもしばしば表記ゆれが見られました。
+						極めつけは同じBGMが複数の別名のマップで使われているケースで、
+						想定される範囲でORとANDを駆使して探し出す必要があります。
+						そこで、タウンマップ上のエリアをクリックするだけで目的のBGMの検索結果に飛べるようにしたのが、このアプリです。
+						デスクトップ上では、マウスオーバーしたエリアと共通のBGMのエリアが赤く点滅します。
+						デスクトップでの利用を前提に設計したため、タッチデバイスには対応していません。
+						実装はビジュアルデザインを用途とする Processing 言語を使い、
+						Webブラウザ上で使用可能にするため JavaScript 移植版の
+						Processing.js で書きました。画像を用いないので、
+						ソースコード単体では非常に軽量に動作するアプリになります。
+						ソースコードは<a href="https://github.com/suneo3476/pokedp-map" target="_blank">GitHub</a>にあります。
+					</p>
+					<div class="shots">
+						<figure>
+							<img src="./img/poke-1.jpg" alt="ダイヤモンド・パールの「シンオウ地方」">
+							<figcaption>ダイヤモンド・パールの「シンオウ地方」</figcaption>
+						</figure>
+						<figure>
+							<img src="./img/poke-2.jpg" alt="ハートゴールド・ソウルシルバーの「ジョウト地方」「カントー地方」">
+							<figcaption>ハートゴールド・ソウルシルバーの「ジョウト地方」「カントー地方」</figcaption>
+						</figure>
+					</div>
+				</div>
+			</div>
+
+			<div class="work">
+				<div class="work-head">
+					<h3>浜松市立追分小学校ホームページリニューアル</h3>
+					<span class="badge-closed">公開終了</span>
+				</div>
+				<div class="work-body">
+					<div class="tags">
+						<span>静的サイト</span><span>レスポンシブ</span>
+					</div>
+					<p>
+						2015年に静岡大学情報学部「地域連携推進室」によるボランティア募集を受けて参加・制作を行い、2016年４月に公開されたものです。
+						３グループでのコンペ形式で企画・制作を行い、自グループ案が採用されたものになります。グループで設計と実装を分業して、私は実装を担当しました。
+						テキストサイト風味あふれる旧サイトから、スマートフォン表示対応のモダンなサイトに生まれ変わりました。
+						これには、学校が保護者への連絡チャネルとしてホームページを活用したいというニーズがあり、
+						多くの保護者がスマートフォンを利用しているという背景がありました。
+						手軽にレスポンシブ対応するため、導入が容易なオリジナルBootstrapテーマの
+						「<a href="http://honokak.osaka/" target="_blank">Honoka</a>」を使用しました。
+					</p>
+					<div class="shots">
+						<figure>
+							<img src="./img/oiwake-1.jpg" alt="追分小">
+							<figcaption>右上のボタンをタップすると</figcaption>
+						</figure>
+						<figure>
+							<img src="./img/oiwake-2.jpg" alt="追分小 ハンバーガーメニュー">
+							<figcaption>メニューが開きます</figcaption>
+						</figure>
+					</div>
+				</div>
+			</div>
+
+			<div class="work">
+				<div class="work-head">
+					<h3>「はままつポンポンまつり」ホームページ制作・運用</h3>
+					<span class="badge-closed">公開終了</span>
+				</div>
+				<div class="work-body">
+					<div class="tags">
+						<span>静的サイト</span><span>レスポンシブ</span>
+					</div>
+					<p>
+						2015年〜2016年、NPO法人・日本モータースポーツ振興会さんのイベント「はままつポンポンまつり」のホームページ制作・運用を行いました。
+						私自身も「はまポン」の実行委員会に加わり、協賛や出展内容の追加・変更の連絡を受けてホームページの更新を行いました。
+						オリジナルBootstrapテーマの「<a href="http://honokak.osaka/" target="_blank">Honoka</a>」を使用しました。
+						<a href="http://hamapon.web.fc2.com/index.html" target="_blank">現在公開されているページ</a>はその後リニューアルされており、当時のものとは異なります。
+					</p>
+					<div class="shots">
+						<figure>
+							<img src="./img/hamapon-1.jpg" alt="はまポンまつりトップページ">
+							<figcaption>当時のトップページ</figcaption>
+						</figure>
+						<figure>
+							<img src="./img/hamapon-2.jpg" alt="はまポンまつり出展ページ">
+							<figcaption>当時の出展ページ</figcaption>
+						</figure>
+					</div>
+				</div>
+			</div>
+
+		</section>
+
+		<section class="panel" id="panel-hobby">
+			<h2 class="section-bar">趣味</h2>
+			<ul class="hobby-list">
+				<li>
+					<div class="h-title">🐴 <a href="./umalog/" target="_blank">乗馬ログ</a></div>
+					<div class="h-desc">乗馬体験の記録です</div>
+				</li>
+				<li>
+					<div class="h-title">🎹 <a href="./score/index.html" target="_blank">ピアノ楽譜</a></div>
+					<div class="h-desc">score and music</div>
+				</li>
+				<li>
+					<div class="h-title">🔔 <a href="./dora/index.html" target="_blank">ドラえもん</a></div>
+					<div class="h-desc">doraemon material</div>
+				</li>
+				<li>
+					<div class="h-title">🎸 バンド活動（aikoコピー、オリジナル）</div>
+					<div class="h-desc">キーボードを担当しています。ライブ歴は制作物の<a href="#works">「七輪ライブラリー」</a>で見られます</div>
+				</li>
+			</ul>
+		</section>
+
+		<section class="panel" id="panel-links">
+			<h2 class="section-bar">リンク</h2>
+			<div class="link-group">
+				<h3>技術</h3>
+				<ul>
+					<li><a href="https://zenn.dev/suneo3476" target="_blank">Zenn</a></li>
+					<li><a href="https://qiita.com/suneo3476" target="_blank">Qiita</a></li>
+					<li><a href="https://speakerdeck.com/suneo3476" target="_blank">Speaker Deck</a></li>
+					<li><a href="https://github.com/suneo3476" target="_blank">GitHub</a></li>
+					<li><a href="https://x.com/totom_saku" target="_blank">X (@totom_saku)</a></li>
 				</ul>
-				<ul class="edu">
-					<li>浜松工業高等学校　情報技術科　卒業</li>
-					<li>静岡大学　情報学部情報科学科　卒業</li>
-					<li>同大学院　総合科学技術研究科情報学専攻　修了</li>
+			</div>
+			<div class="link-group">
+				<h3>一般</h3>
+				<ul>
+					<li><a href="https://suneo3476.hateblo.jp/" target="_blank">はてなブログ</a><span class="link-desc">ブログです</span></li>
 				</ul>
 			</div>
 		</section>
 
-		<section id="contents">
-			<h2><span class="emoji">📦</span>コンテンツ</h2>
-			<div class="tiles">
-				<a class="tile" href="./umalog/" target="_blank">
-					<div class="t-emoji">🐴</div>
-					<div class="t-title">乗馬ログ</div>
-					<div class="t-desc">乗馬体験の記録です</div>
-				</a>
-				<a class="tile" href="./score/index.html" target="_blank">
-					<div class="t-emoji">🎹</div>
-					<div class="t-title">ピアノ楽譜</div>
-					<div class="t-desc">score and music</div>
-				</a>
-				<a class="tile" href="./dora/index.html" target="_blank">
-					<div class="t-emoji">🔔</div>
-					<div class="t-title">ドラえもん</div>
-					<div class="t-desc">doraemon material</div>
-				</a>
-			</div>
-		</section>
-
-		<section id="works">
-			<h2><span class="emoji">🛠️</span>制作物</h2>
-
-			<div class="card work">
-				<h3>Wikipediaライクな教科書システムの実装 <span class="badge-closed">公開終了</span></h3>
-				<div class="pills">
-					<span class="pill">CentOS 7</span>
-					<span class="pill">Apache2</span>
-					<span class="pill">MySQL</span>
-					<span class="pill">PHP</span>
-					<span class="pill alt">MediaWiki</span>
-					<span class="pill alt">JavaScript</span>
-				</div>
-				<p>
-					学部卒業研究で作ったものです。紙の教科書みたいに最初から最後まで流れのある編纂物とは違った、
-					ニコニコ大百科のような教科書があったら面白いよね、という発想で作ったものです。
-					2014年度に大学のドメインで公開して、静岡大学情報学部情報社会学科で開講の科目「公共圏論」で実際に学生に触ってもらいました。
-					WikiエンジンはWikipediaが採用している MediaWiki です。
-					LAMP構成で構築し、必要に応じてフロントエンドを JavaScript で拡張しました。
-					研究としての新規性という点では課題が残りましたが、実際の授業で学生に使ってもらえたこと、
-					そして後に後輩のひとりが「これみたいなものを作りたい」とWebエンジニアを志すきっかけになったと聞けたことは、
-					作ってよかったと思える成果でした。
-				</p>
-				<div class="shots">
-					<figure>
-						<img src="./img/mwiki-1.png" alt="カテゴリページ">
-						<figcaption>いわゆる「タグ」のページ</figcaption>
-					</figure>
-					<figure>
-						<img src="./img/mwiki-2.png" alt="カードページ">
-						<figcaption>ひとつの記事は分量が決まっています</figcaption>
-					</figure>
-				</div>
-			</div>
-
-			<div class="card work">
-				<h3>ポケモンBGMのYoutube検索を支援するタウンマップ型アプリ
-					<a href="https://suneo3476.github.io/poke" target="_blank">↗</a>
-				</h3>
-				<div class="pills">
-					<span class="pill">Processing</span>
-					<span class="pill alt">JavaScript</span>
-				</div>
-				<p>
-					2015年作。ゲーム音楽のピアノアレンジが趣味の私は
-					よくYoutubeで他人のアレンジを聴いていました。
-					しかし、マップの名前をいちいち憶えているわけでもなく、
-					アップロード者のつけたタイトルにもしばしば表記ゆれが見られました。
-					極めつけは同じBGMが複数の別名のマップで使われているケースで、
-					想定される範囲でORとANDを駆使して探し出す必要があります。
-					そこで、タウンマップ上のエリアをクリックするだけで目的のBGMの検索結果に飛べるようにしたのが、このアプリです。
-					デスクトップ上では、マウスオーバーしたエリアと共通のBGMのエリアが赤く点滅します。
-					デスクトップでの利用を前提に設計したため、タッチデバイスには対応していません。
-					実装はビジュアルデザインを用途とする Processing 言語を使い、
-					Webブラウザ上で使用可能にするため JavaScript 移植版の
-					Processing.js で書きました。画像を用いないので、
-					ソースコード単体では非常に軽量に動作するアプリになります。
-					ソースコードは<a href="https://github.com/suneo3476/pokedp-map" target="_blank">GitHub</a>にあります。
-				</p>
-				<div class="shots">
-					<figure>
-						<img src="./img/poke-1.jpg" alt="ダイヤモンド・パールの「シンオウ地方」">
-						<figcaption>ダイヤモンド・パールの「シンオウ地方」</figcaption>
-					</figure>
-					<figure>
-						<img src="./img/poke-2.jpg" alt="ハートゴールド・ソウルシルバーの「ジョウト地方」「カントー地方」">
-						<figcaption>ハートゴールド・ソウルシルバーの「ジョウト地方」「カントー地方」</figcaption>
-					</figure>
-				</div>
-			</div>
-
-			<div class="card work">
-				<h3>浜松市立追分小学校ホームページリニューアル <span class="badge-closed">公開終了</span></h3>
-				<div class="pills">
-					<span class="pill">静的サイト</span>
-					<span class="pill alt">レスポンシブ</span>
-				</div>
-				<p>
-					2015年に静岡大学情報学部「地域連携推進室」によるボランティア募集を受けて参加・制作を行い、2016年４月に公開されたものです。
-					３グループでのコンペ形式で企画・制作を行い、自グループ案が採用されたものになります。グループで設計と実装を分業して、私は実装を担当しました。
-					テキストサイト風味あふれる旧サイトから、スマートフォン表示対応のモダンなサイトに生まれ変わりました。
-					これには、学校が保護者への連絡チャネルとしてホームページを活用したいというニーズがあり、
-					多くの保護者がスマートフォンを利用しているという背景がありました。
-					手軽にレスポンシブ対応するため、導入が容易なオリジナルBootstrapテーマの
-					「<a href="http://honokak.osaka/" target="_blank">Honoka</a>」を使用しました。
-				</p>
-				<div class="shots">
-					<figure>
-						<img src="./img/oiwake-1.jpg" alt="追分小">
-						<figcaption>右上のボタンをタップすると</figcaption>
-					</figure>
-					<figure>
-						<img src="./img/oiwake-2.jpg" alt="追分小 ハンバーガーメニュー">
-						<figcaption>メニューが開きます</figcaption>
-					</figure>
-				</div>
-			</div>
-
-			<div class="card work">
-				<h3>「はままつポンポンまつり」ホームページ制作・運用 <span class="badge-closed">公開終了</span></h3>
-				<div class="pills">
-					<span class="pill">静的サイト</span>
-					<span class="pill alt">レスポンシブ</span>
-				</div>
-				<p>
-					2015年〜2016年、NPO法人・日本モータースポーツ振興会さんのイベント「はままつポンポンまつり」のホームページ制作・運用を行いました。
-					私自身も「はまポン」の実行委員会に加わり、協賛や出展内容の追加・変更の連絡を受けてホームページの更新を行いました。
-					オリジナルBootstrapテーマの「<a href="http://honokak.osaka/" target="_blank">Honoka</a>」を使用しました。
-					<a href="http://hamapon.web.fc2.com/index.html" target="_blank">現在公開されているページ</a>はその後リニューアルされており、当時のものとは異なります。
-				</p>
-				<div class="shots">
-					<figure>
-						<img src="./img/hamapon-1.jpg" alt="はまポンまつりトップページ">
-						<figcaption>当時のトップページ</figcaption>
-					</figure>
-					<figure>
-						<img src="./img/hamapon-2.jpg" alt="はまポンまつり出展ページ">
-						<figcaption>当時の出展ページ</figcaption>
-					</figure>
-				</div>
-			</div>
-
-		</section>
-
-		<section id="links">
-			<h2><span class="emoji">🔗</span>リンク</h2>
-			<div class="link-btns">
-				<a href="https://github.com/suneo3476" target="_blank">GitHub</a>
-				<a href="https://qiita.com/suneo3476" target="_blank">Qiita</a>
-				<a href="https://speakerdeck.com/suneo3476" target="_blank">Speaker Deck</a>
-				<a href="https://twitter.com/suneo3476Pro" target="_blank">X (Twitter)</a>
-				<a href="https://facebook.com/fujimorim" target="_blank">Facebook</a>
-				<a href="https://suneo3476.hateblo.jp/" target="_blank">はてなブログ</a>
-			</div>
-		</section>
-
-		<section id="contact">
-			<h2><span class="emoji">✉️</span>連絡先</h2>
-			<div class="card contact-card">
+		<section class="panel" id="panel-contact">
+			<h2 class="section-bar">連絡先</h2>
+			<div class="contact-box">
 				<div>お仕事のご相談などはメールでご連絡ください</div>
-				<a class="mail" href="mailto:suneo3476@gmail.com">メールを送る</a>
+				<a class="btn-mail" href="mailto:suneo3476@gmail.com">メールを送る</a>
 			</div>
 		</section>
 
 	</main>
 
-	<footer>© Fujimori Saku</footer>
+	<footer class="site-footer">© Fujimori Saku</footer>
+
+	<script>
+		(function () {
+			var tabs = document.querySelectorAll('.tab');
+			var panels = document.querySelectorAll('.panel');
+			var DEFAULT_TAB = 'profile';
+
+			function show(name) {
+				var found = document.getElementById('panel-' + name);
+				if (!found) { name = DEFAULT_TAB; }
+				tabs.forEach(function (t) {
+					t.classList.toggle('active', t.dataset.tab === name);
+				});
+				panels.forEach(function (p) {
+					p.classList.toggle('active', p.id === 'panel-' + name);
+				});
+			}
+
+			tabs.forEach(function (t) {
+				t.addEventListener('click', function () {
+					history.replaceState(null, '', '#' + t.dataset.tab);
+					show(t.dataset.tab);
+				});
+			});
+
+			window.addEventListener('hashchange', function () {
+				show(location.hash.slice(1) || DEFAULT_TAB);
+			});
+
+			show(location.hash.slice(1) || DEFAULT_TAB);
+		})();
+	</script>
 
 </body>
 
