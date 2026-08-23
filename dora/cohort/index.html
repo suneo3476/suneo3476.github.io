@@ -107,7 +107,6 @@ footer a{color:#fff}
     <button id="nextY" title="次の年度">▶</button>
     <span class="agepick">または 今年度の年齢: <select id="ageSel"></select></span>
     <span class="age" id="ageNote"></span>
-    <span class="filter"><label><input type="checkbox" id="animeOnly" checked> 画像版チャートの範囲のみ表示(作成当時アニメ・映像化されていた作品)</label></span>
     <span class="filter"><label><input type="checkbox" id="grayOut" checked> 絶版の単行本をグレー表示</label></span>
     <div class="viewtabs">
       <button id="viewTime" class="vtab active">時系列で見る</button>
@@ -138,6 +137,7 @@ footer a{color:#fff}
 </div>
 
 <footer>
+  本ページのデータは、2015年頃作成の<a href="../">画像版チャート</a>を2026年8月に改めて精査・再構築したものです。<br>
   Special Thanks: <a href="https://hanaballoon.com/dorachan/" target="_blank" rel="noopener">ドラちゃんのおへや(hanaballoon.com)</a> 様
   — テレビアニメ各話データ・初出リスト・単行本収録リストを参照させていただきました。<br>
   <a href="../">ドラえもん資料TOP</a> / <a href="../img/dorachart.pdf">画像版チャートPDF</a> / <a href="/">サイトTOP</a>
@@ -170,14 +170,11 @@ footer a{color:#fff}
     o.value = b; o.textContent = (fyNow - b) + "歳";
     ageSel.appendChild(o);
   });
-  const animeOnly = document.getElementById("animeOnly");
   const grayOut = document.getElementById("grayOut");
   let view = "time";
   const OOP = {cc:1, ff:1, pika:1, bunko:1};  // 絶版レーベル
   function isOop(brand){ return !!OOP[brand]; }
   function esc(s){ return String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
-  function isAdapted(e){ return !!(e.anime || e.chartAnime); }
-  function inChartScope(e){ return isAdapted(e) || !!e.chartIncluded; }
 
   function mediaCard(m){
     const [brand, vol] = m;
@@ -209,15 +206,14 @@ footer a{color:#fff}
 
   function render(birth){
     const all = byBirth[birth] || [];
-    const list = animeOnly.checked ? all.filter(inChartScope) : all;
+    const list = all;
     const fyNow = fiscalNow();
     document.getElementById("ageNote").textContent =
       birth + "年4月2日〜" + (birth+1) + "年4月1日生まれ(今年度" + (fyNow - birth) + "歳になる方)";
     const tcCount = list.filter(e=>e.media.some(m=>m[0]==="tc")).length;
     document.getElementById("summary").innerHTML =
       "<b>" + birth + "年度生まれ</b>の方が小学2〜6年生のときに学年誌に載っていたドラえもん短編は全 <b>" + all.length + "本</b>" +
-      "(表示中 " + list.length + "本、" +
-      "<span style='color:var(--red);font-weight:700'>てんコミ収録 " + tcCount + "本</span>)。" +
+      "(うち<span style='color:var(--red);font-weight:700'>てんコミ収録 " + tcCount + "本</span>)。" +
       "クリックすると収録単行本と電子書籍情報が開きます。";
 
     const wrap = document.getElementById("grades");
@@ -245,9 +241,7 @@ footer a{color:#fff}
       items.forEach(e=>{
         const li = document.createElement("li");
         const isTC = e.media.some(m=>m[0]==="tc");
-        let chips = "";
-        if (!animeOnly.checked && inChartScope(e)) chips += '<span class="chip anime">画像版チャート掲載</span>';
-        chips += e.media.map(m=>{
+        let chips = e.media.map(m=>{
           const B = D.brands[m[0]] || D.brands.unknown;
           const label = m[0]==="none" ? "未収録" : (m[0]==="bunko" ? "文庫" + m[1] : B.short + m[1] + (B.unit||""));
           const oop = (grayOut.checked && isOop(m[0])) ? " oop" : "";
@@ -342,7 +336,6 @@ footer a{color:#fff}
   }
   sel.addEventListener("change", ()=>setBirth(+sel.value));
   ageSel.addEventListener("change", ()=>setBirth(+ageSel.value));
-  animeOnly.addEventListener("change", ()=>render(+sel.value));
   grayOut.addEventListener("change", ()=>render(+sel.value));
   const tabTime = document.getElementById("viewTime"), tabShelf = document.getElementById("viewShelf");
   function setView(v){
