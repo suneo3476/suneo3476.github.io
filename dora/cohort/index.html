@@ -28,6 +28,7 @@ header a{color:#fff}
 .selector .filter{display:block;margin-top:.5em;font-size:.9em}
 .selector .filter label{font-weight:400;margin:0;cursor:pointer}
 .viewtabs{margin-top:.8em;display:flex;justify-content:center;gap:.4em}
+.share{margin-top:.7em;min-height:20px}
 .vtab{font-size:.95em;padding:.35em 1em;border:1px solid var(--blue);border-radius:99px;background:#fff;color:var(--blue-dark);cursor:pointer}
 .vtab.active{background:var(--blue);color:#fff;font-weight:700}
 .chip.oop, .grayed{opacity:.42;filter:grayscale(.9)}
@@ -112,6 +113,9 @@ footer a{color:#fff}
       <button id="viewTime" class="vtab active">時系列で見る</button>
       <button id="viewShelf" class="vtab">収録単行本で見る</button>
     </div>
+    <div class="share">
+      <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://suneo3476.github.io/dora/cohort/" data-lang="ja">ツイート</a>
+    </div>
   </div>
 
   <div class="cohort-summary" id="summary"></div>
@@ -139,6 +143,7 @@ footer a{color:#fff}
   <a href="../">ドラえもん資料TOP</a> / <a href="../img/dorachart.pdf">画像版チャートPDF</a> / <a href="/">サイトTOP</a>
 </footer>
 
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script src="data.js?v=20260823d"></script>
 <script>
 (function(){
