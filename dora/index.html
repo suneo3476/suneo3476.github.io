@@ -1,37 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-	<meta charset="utf-8">
-	<title>ドラえもん資料</title>
-	<style type="text/css">
-		body {
-			margin:0.5em;
-			padding:0.5em;
-			background-color: #DDDDDD;
-			font: 12px sans-serif;
-		}
-		canvas {
-			background-color: white;
-		}
-		#canvas .olControlAttribution {
-		    font-size:13px;
-		    bottom:3px;
-		}
-	</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ドラえもん資料 — 生年別・ドラえもん連載チャート</title>
+<meta name="description" content="小学二年生〜小学六年生・生年別・ドラえもん短編チャート(画像版)と、生まれ年から引ける閲覧アプリ。">
+<style>
+:root{
+  --blue:#1c9fe0; --blue-dark:#0d6fa8; --red:#d0342c;
+  --bg:#f2f8fc; --card:#ffffff; --ink:#20323e; --muted:#6b7f8c; --line:#d8e6ef;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+header{background:linear-gradient(135deg,var(--blue) 0%,var(--blue-dark) 100%);color:#fff;padding:1.4em 1em 1.1em;text-align:center}
+header .crumb{font-size:.8em;opacity:.9;margin:0 0 .3em}
+header h1{margin:0;font-size:1.35em;letter-spacing:.02em}
+header a{color:#fff}
+.wrap{max-width:1000px;margin:0 auto;padding:1em}
+.appbanner{background:#fff8e2;border:1px solid #ecd98f;border-radius:10px;padding:.7em 1em;margin:1em 0;font-size:.95em}
+section.card{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:0 0 1.2em;overflow:hidden}
+section.card>h2{margin:0;background:var(--blue);color:#fff;font-size:1.05em;padding:.55em .9em}
+section.card .body{padding:.9em}
+.chartgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.8em}
+.chartgrid a{display:block;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
+.chartgrid a:hover{box-shadow:0 4px 14px rgba(13,111,168,.18)}
+.chartgrid img{width:100%;height:auto;display:block}
+.chartgrid .cap{display:block;text-align:center;font-size:.8em;color:var(--muted);padding:.3em}
+.actions{margin:.9em 0 0;display:flex;flex-wrap:wrap;gap:.5em}
+.actions a{text-decoration:none;background:var(--blue);color:#fff;border-radius:8px;padding:.35em .9em;font-size:.9em}
+.actions a.sub{background:#fff;color:var(--blue-dark);border:1px solid var(--blue)}
+.note{font-size:.85em;color:var(--muted);margin:.7em 0 0}
+footer{margin:2em 0 0;padding:1.4em 1em 2em;background:var(--blue-dark);color:#dceefb;font-size:.85em;text-align:center}
+footer a{color:#fff}
+</style>
 </head>
 <body>
-<a href="/">TOP</a> / Doraemon Material
-<h1>ドラえもん資料</h1>
-<div>
-	<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://suneo3476.github.io/dora" data-lang="ja">ツイート</a>
-	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<header>
+  <p class="crumb"><a href="/">TOP</a> / Doraemon Material</p>
+  <h1>ドラえもん資料</h1>
+</header>
+
+<div class="wrap">
+  <div class="appbanner">
+    <b>NEW:</b> このチャートをデータ化した閲覧アプリを作りました →
+    <a href="cohort/">あなたが小学◯年生で読んだ『ドラえもん』</a>
+  </div>
+
+  <section class="card">
+    <h2>小学二年生〜小学六年生・生年別・ドラえもん連載チャート</h2>
+    <div class="body">
+      <div class="actions" style="margin:0 0 .5em">
+        <a href="img/dorachart.pdf">PDF版をダウンロード (332KB)</a>
+        <span><a href="https://twitter.com/share" class="twitter-share-button" data-url="https://suneo3476.github.io/dora/" data-lang="ja">ツイート</a></span>
+      </div>
+      <p class="note" style="margin:0 0 .9em">下の画像は通信量に配慮した縮小版です。細かい文字まで読むには、各画像をタップして原寸PNGを開くか、上のPDF版(332KBと軽く、拡大しても鮮明なのでおすすめ)をどうぞ。</p>
+      <div class="chartgrid">
+        <a href="img/dorachart1.png" target="_blank"><img src="img/dorachart1_thumb.jpg" alt="チャート 1/3枚目" loading="lazy"><span class="cap">1/3枚目 (1970〜1978年)<br>タップで原寸PNG (0.9MB)</span></a>
+        <a href="img/dorachart2.png" target="_blank"><img src="img/dorachart2_thumb.jpg" alt="チャート 2/3枚目" loading="lazy"><span class="cap">2/3枚目 (1978〜1985年)<br>タップで原寸PNG (1.0MB)</span></a>
+        <a href="img/dorachart3.png" target="_blank"><img src="img/dorachart3_thumb.jpg" alt="チャート 3/3枚目" loading="lazy"><span class="cap">3/3枚目 (1985〜1994年)<br>タップで原寸PNG (0.5MB)</span></a>
+      </div>
+      <p class="note">2015年頃作成。手持ちのデータの関係上、アニメ化された作品に限られ、題名はそのサブタイトルです。てんコミ収録作品は赤太字にしています(単行本としてメジャーなため)。</p>
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+  </section>
 </div>
-<h2>小学二年生～小学六年生・生年別・ドラえもん連載チャート</h2>
-<div id="imgContent">
-	<a href="img/dorachart1.png" target="_blank"><img src="img/dorachart1.png" alt="1/3枚目" style="float:left" height="500px"></a>
-	<a href="img/dorachart2.png" target="_blank"><img src="img/dorachart2.png" alt="2/3枚目" style="float:left" height="500px"></a>
-	<a href="img/dorachart3.png" target="_blank"><img src="img/dorachart3.png" alt="3/3枚目" style="float:left" height="500px"></a>
-</div>
-<p><a href="img/dorachart.pdf">PDFでダウンロード</a></p>
+
+<footer>
+  Special Thanks: <a href="https://hanaballoon.com/dorachan/" target="_blank" rel="noopener">ドラちゃんのおへや(hanaballoon.com)</a> 様
+  — チャート作成にあたり、テレビアニメ各話データ・初出情報を参照させていただきました。<br>
+  <a href="cohort/">閲覧アプリ版</a> / <a href="/">サイトTOP</a>
+</footer>
 </body>
 </html>

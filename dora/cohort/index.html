@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>あなたが小学◯年生で読んだ『ドラえもん』</title>
+<meta name="description" content="生まれ年度を選ぶと、小学二年生〜小学六年生のときに学年誌で読んだドラえもん短編と、その収録単行本・電子書籍情報を一覧できます。">
+<style>
+:root{
+  --blue:#1c9fe0; --blue-dark:#0d6fa8; --red:#d0342c; --yellow:#f7c948;
+  --bg:#f2f8fc; --card:#ffffff; --ink:#20323e; --muted:#6b7f8c; --line:#d8e6ef;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+header{background:linear-gradient(135deg,var(--blue) 0%,var(--blue-dark) 100%);color:#fff;padding:1.4em 1em 1.1em;text-align:center}
+header h1{margin:0;font-size:1.35em;letter-spacing:.02em}
+header p{margin:.4em auto 0;max-width:44em;font-size:.85em;opacity:.92}
+header a{color:#fff}
+.wrap{max-width:860px;margin:0 auto;padding:1em}
+.selector{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1em;margin:-1.6em auto 1em;max-width:640px;box-shadow:0 4px 14px rgba(13,111,168,.12);position:relative;text-align:center}
+.selector label{font-weight:700;margin-right:.5em}
+.selector select{font-size:1.05em;padding:.35em .6em;border:1px solid var(--line);border-radius:8px;background:#fff}
+.selector button{font-size:1em;padding:.3em .7em;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;margin:0 .25em}
+.selector button:hover{background:var(--bg)}
+.selector .age{display:block;margin-top:.4em;font-size:.85em;color:var(--muted)}
+.selector .agepick{display:block;margin-top:.5em;font-size:.9em}
+.selector .agepick select{font-size:1em;padding:.25em .5em}
+.selector .filter{display:block;margin-top:.5em;font-size:.9em}
+.selector .filter label{font-weight:400;margin:0;cursor:pointer}
+.viewtabs{margin-top:.8em;display:flex;justify-content:center;gap:.4em}
+.vtab{font-size:.95em;padding:.35em 1em;border:1px solid var(--blue);border-radius:99px;background:#fff;color:var(--blue-dark);cursor:pointer}
+.vtab.active{background:var(--blue);color:#fff;font-weight:700}
+.chip.oop, .grayed{opacity:.42;filter:grayscale(.9)}
+.shelf-brand{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:0 0 1.2em;overflow:hidden}
+.shelf-brand>h2{margin:0;background:var(--blue);color:#fff;font-size:1.02em;padding:.55em .9em;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.3em}
+.shelf-brand>h2 .cnt{font-size:.78em;font-weight:400;opacity:.9}
+.shelf-brand.grayed>h2{background:#8a97a0}
+.volgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(15.5em,1fr));gap:.8em;padding:.8em}
+.volcard{border:1px solid var(--line);border-radius:10px;padding:.6em;display:flex;gap:.7em;background:#fff}
+.volcard .cover{flex:0 0 56px;height:80px;border-radius:4px;overflow:hidden;position:relative;background:#e8eef3}
+.volcard .cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.volcard .cover .ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-size:.6em;text-align:center;line-height:1.3;padding:.3em}
+.volcard .cover .ph b{font-size:1.5em}
+.volcard .vinfo{font-size:.82em;min-width:0;flex:1}
+.volcard .vinfo .vname{font-weight:700}
+.volcard .vinfo a{font-size:.85em;text-decoration:none;background:var(--blue);color:#fff;border-radius:6px;padding:.08em .5em;margin-left:.4em;vertical-align:middle}
+.volcard ul{margin:.35em 0 0;padding-left:1.2em}
+.volcard li{margin:.1em 0}
+.volcard li .iss{color:var(--muted);font-size:.88em;white-space:nowrap}
+.shelf-note{padding:.7em .9em;font-size:.85em;color:var(--muted)}
+.cohort-summary{background:#fff8e2;border:1px solid #ecd98f;border-radius:10px;padding: .7em 1em;margin:0 0 .8em;font-size:.95em}
+.legend{margin:0 0 1.2em;font-size:.82em;color:var(--muted);display:flex;flex-wrap:wrap;gap:.4em 1.2em;padding:0 .3em}
+.legend .chip{vertical-align:middle}
+section.grade{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:0 0 1.2em;overflow:hidden}
+section.grade>h2{margin:0;background:var(--blue);color:#fff;font-size:1.05em;padding:.55em .9em;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.3em}
+section.grade>h2 .range{font-size:.78em;font-weight:400;opacity:.9}
+.empty-note{padding:.9em 1em;color:var(--muted);font-size:.9em}
+ul.works{list-style:none;margin:0;padding:0}
+ul.works>li{border-top:1px solid var(--line)}
+ul.works>li:first-child{border-top:none}
+.work-row{display:flex;align-items:baseline;gap:.7em;padding:.55em .9em;cursor:pointer;flex-wrap:wrap}
+.work-row:hover{background:#eef7fd}
+.work-row .issue{flex:0 0 6.8em;color:var(--muted);font-size:.85em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.work-row .title{font-size:1em}
+.work-row .title.tenkomi{color:var(--red);font-weight:700}
+.work-row .chips{margin-left:auto;display:flex;gap:.3em;flex-wrap:wrap}
+.chip{font-size:.72em;padding:.1em .5em;border-radius:99px;color:#fff;white-space:nowrap}
+.chip.anime{background:#fff;color:var(--blue-dark);border:1px solid var(--blue)}
+.detail{display:none;background:#f7fbfe;border-top:1px dashed var(--line);padding:.8em .9em 1em}
+li.open .detail{display:block}
+.detail .alt-title{font-size:.85em;color:var(--muted);margin:0 0 .6em}
+.detail .note{font-size:.83em;background:#eef7ff;border:1px solid #bcdcf0;border-radius:8px;padding:.4em .7em;margin:0 0 .7em}
+.media-cards{display:flex;flex-wrap:wrap;gap:.8em}
+.mcard{display:flex;gap:.7em;background:#fff;border:1px solid var(--line);border-radius:10px;padding:.6em;min-width:15.5em;flex:1 1 16em;max-width:100%}
+.mcard .cover{flex:0 0 64px;height:92px;border-radius:4px;overflow:hidden;position:relative;background:#e8eef3}
+.mcard .cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.mcard .cover .ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-size:.66em;text-align:center;line-height:1.3;padding:.3em}
+.mcard .cover .ph b{font-size:1.5em}
+.mcard .minfo{font-size:.82em;min-width:0}
+.mcard .minfo .bname{font-weight:700;margin:0 0 .2em}
+.mcard .minfo .links{margin:.35em 0 0;display:flex;flex-wrap:wrap;gap:.35em}
+.mcard .minfo .links a{font-size:.9em;text-decoration:none;background:var(--blue);color:#fff;border-radius:6px;padding:.12em .55em}
+.mcard .minfo .noebook{color:var(--muted);font-size:.9em;margin-top:.35em}
+.notes{background:var(--card);border:1px solid var(--line);border-radius:12px;padding: .9em 1.1em;font-size:.85em;color:var(--ink)}
+.notes h3{margin:.2em 0 .4em;font-size:.95em}
+.notes ul{margin:.3em 0;padding-left:1.4em}
+footer{margin:2em 0 0;padding:1.4em 1em 2em;background:var(--blue-dark);color:#dceefb;font-size:.85em;text-align:center}
+footer a{color:#fff}
+@media (max-width:560px){
+  .work-row .chips{margin-left:0;width:100%}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>あなたが小学◯年生で読んだ『ドラえもん』</h1>
+  <p>生まれ年度を選ぶと、小学2〜6年生のときに学年誌(小学二年生〜小学六年生)に載っていた『ドラえもん』短編と、その収録単行本・電子書籍情報を一覧できます。<br>
+  <a href="../">画像版チャートはこちら</a></p>
+</header>
+
+<div class="wrap">
+  <div class="selector">
+    <button id="prevY" title="前の年度">◀</button>
+    <label for="birthSel">生まれ年度</label>
+    <select id="birthSel"></select>
+    <button id="nextY" title="次の年度">▶</button>
+    <span class="agepick">または 今年度の年齢: <select id="ageSel"></select></span>
+    <span class="age" id="ageNote"></span>
+    <span class="filter"><label><input type="checkbox" id="animeOnly" checked> 画像版チャートの範囲のみ表示(作成当時アニメ・映像化されていた作品)</label></span>
+    <span class="filter"><label><input type="checkbox" id="grayOut" checked> 絶版の単行本をグレー表示</label></span>
+    <div class="viewtabs">
+      <button id="viewTime" class="vtab active">時系列で見る</button>
+      <button id="viewShelf" class="vtab">収録単行本で見る</button>
+    </div>
+  </div>
+
+  <div class="cohort-summary" id="summary"></div>
+  <div class="legend">
+    <span><b style="color:var(--red)">赤太字</b> = てんとう虫コミックス(てんコミ)収録作品</span>
+    <span><span class="chip" style="background:#3568b8;opacity:.42;filter:grayscale(.9)">グレーのチップ</span> = 絶版の単行本</span>
+    <span>手に入らない単行本や未収録の作品も、現在は『藤子・F・不二雄大全集 ドラえもん』で読めます</span>
+  </div>
+  <div id="grades"></div>
+
+  <div class="notes">
+    <h3>このページについて</h3>
+    <ul>
+      <li>元になったのは2015年頃に作成した<a href="../">「小学二年生〜小学六年生・生年別・ドラえもん連載チャート」</a>(以下「画像版チャート」)です。当時のデータは「ドラちゃんのおへや」のテレビアニメ各話データ(サブタイトル・原作巻数)と初出情報をまとめたものでした。</li>
+      <li>本ページのデータは「ドラちゃんのおへや」の初出リスト・単行本収録リスト準拠で再構築したものです。題名は単行本サブタイトルです。収録媒体はチャート作成当時(2015年頃)の情報に揃えており、それ以降に刊行された0巻(2019年)・プラス7巻(2023年)は含めていません。</li>
+      <li>「年度」は4月2日〜翌年4月1日生まれの区切りです。1986年9月〜12月と1987年6月〜1988年5月は連載中断のためデータがありません。</li>
+      <li>各巻の詳細・電子書籍は小学館の書誌ページへのリンクからどうぞ。書影は国立国会図書館サーチの書影APIを利用し、取得できない場合は色付きのプレースホルダを表示します。</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  Special Thanks: <a href="https://hanaballoon.com/dorachan/" target="_blank" rel="noopener">ドラちゃんのおへや(hanaballoon.com)</a> 様
+  — テレビアニメ各話データ・初出リスト・単行本収録リストを参照させていただきました。<br>
+  <a href="../">ドラえもん資料TOP</a> / <a href="../img/dorachart.pdf">画像版チャートPDF</a> / <a href="/">サイトTOP</a>
+</footer>
+
+<script src="data.js?v=20260823d"></script>
+<script>
+(function(){
+  const D = DORA_DATA;
+  const MAGS = {2:"小学二年生",3:"小学三年生",4:"小学四年生",5:"小学五年生",6:"小学六年生"};
+  const births = [...new Set(D.entries.map(e=>e.birth))].sort();
+  const byBirth = {};
+  D.entries.forEach(e=>{ (byBirth[e.birth] = byBirth[e.birth] || []).push(e); });
+
+  function fiscalNow(){
+    const now = new Date();
+    return now.getMonth()+1 >= 4 ? now.getFullYear() : now.getFullYear()-1;
+  }
+  const sel = document.getElementById("birthSel");
+  const ageSel = document.getElementById("ageSel");
+  const fyNow = fiscalNow();
+  births.forEach(b=>{
+    const o = document.createElement("option");
+    o.value = b; o.textContent = b + "年度生まれ";
+    sel.appendChild(o);
+  });
+  [...births].reverse().forEach(b=>{
+    const o = document.createElement("option");
+    o.value = b; o.textContent = (fyNow - b) + "歳";
+    ageSel.appendChild(o);
+  });
+  const animeOnly = document.getElementById("animeOnly");
+  const grayOut = document.getElementById("grayOut");
+  let view = "time";
+  const OOP = {cc:1, ff:1, pika:1, bunko:1};  // 絶版レーベル
+  function isOop(brand){ return !!OOP[brand]; }
+  function esc(s){ return String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+  function isAdapted(e){ return !!(e.anime || e.chartAnime); }
+  function inChartScope(e){ return isAdapted(e) || !!e.chartIncluded; }
+
+  function mediaCard(m){
+    const [brand, vol] = m;
+    const B = D.brands[brand] || D.brands.unknown;
+    const vi = D.volumes[brand + ":" + vol] || null;
+    const volLabel = brand==="none" ? "" : (brand==="bunko" ? "「"+esc(vol)+"」" : esc(vol) + B.unit);
+    const noVolInPh = (brand==="bunko"||brand==="none"||brand==="unknown");
+    let cover = '<div class="ph" style="background:' + B.color + '">' + esc(B.short) + '<b>' + (noVolInPh ? "" : esc(vol)) + '</b></div>';
+    if (vi && vi.isbn){
+      cover += '<img src="https://ndlsearch.ndl.go.jp/thumbnail/' + vi.isbn + '.jpg" alt="" loading="lazy" onerror="this.remove()">';
+    }
+    let links = "";
+    if (vi && vi.shogakukan && brand!=="pika")
+      links = '<a href="https://www.shogakukan.co.jp/books/' + vi.shogakukan + '" target="_blank" rel="noopener">小学館(書誌・電子書籍)</a>';
+    const noEbook = (!B.ebook && brand!=="none" && brand!=="unknown") ? '<div class="noebook">電子書籍なし(絶版・中古/図書館で)</div>' : "";
+    const noneNote = brand==="none" ? '<div class="noebook">単行本未収録(当時)。現在は『藤子・F・不二雄大全集』で読めます</div>' : "";
+    return '<div class="mcard"><div class="cover">' + cover + '</div><div class="minfo">' +
+      '<div class="bname">' + esc(B.name) + '</div>' +
+      (volLabel ? '<div>' + volLabel + '</div>' : '') +
+      (links ? '<div class="links">' + links + '</div>' : '') + noEbook + noneNote + '</div></div>';
+  }
+
+  function detailHTML(e){
+    let h = "";
+    if (e.note) h += '<div class="note">' + esc(e.note) + '</div>';
+    h += '<div class="media-cards">' + e.media.map(mediaCard).join("") + '</div>';
+    return h;
+  }
+
+  function render(birth){
+    const all = byBirth[birth] || [];
+    const list = animeOnly.checked ? all.filter(inChartScope) : all;
+    const fyNow = fiscalNow();
+    document.getElementById("ageNote").textContent =
+      birth + "年4月2日〜" + (birth+1) + "年4月1日生まれ(今年度" + (fyNow - birth) + "歳になる方)";
+    const tcCount = list.filter(e=>e.media.some(m=>m[0]==="tc")).length;
+    document.getElementById("summary").innerHTML =
+      "<b>" + birth + "年度生まれ</b>の方が小学2〜6年生のときに学年誌に載っていたドラえもん短編は全 <b>" + all.length + "本</b>" +
+      "(表示中 " + list.length + "本、" +
+      "<span style='color:var(--red);font-weight:700'>てんコミ収録 " + tcCount + "本</span>)。" +
+      "クリックすると収録単行本と電子書籍情報が開きます。";
+
+    const wrap = document.getElementById("grades");
+    wrap.innerHTML = "";
+    if (view === "shelf") renderShelf(wrap, list);
+    else renderTime(wrap, birth, list);
+  }
+
+  function renderTime(wrap, birth, list){
+    for (let g = 2; g <= 6; g++){
+      const fy = birth + 6 + g;
+      const items = list.filter(e=>e.grade===g).sort((a,b)=>(a.year*12+a.month)-(b.year*12+b.month));
+      const sec = document.createElement("section");
+      sec.className = "grade";
+      sec.innerHTML = '<h2><span>' + MAGS[g] + '</span><span class="range">' + fy + '年4月号〜' + (fy+1) + '年3月号 (' + fy + '年度)</span></h2>';
+      if (!items.length){
+        let why = "この期間の掲載データはありません。";
+        if (fy < 1969) why = "連載開始(1970年1月号)より前のためデータがありません。";
+        else if (fy <= 1971 && g >= 5) why = "この時期、" + MAGS[g] + "ではまだ連載されていませんでした。";
+        else if (fy >= 1986) why = "連載中断期間(1986年9月〜/1987年6月〜1988年5月)や終盤の掲載誌縮小により、この学年ではデータがありません。";
+        sec.innerHTML += '<div class="empty-note">' + why + '</div>';
+        wrap.appendChild(sec); continue;
+      }
+      const ul = document.createElement("ul"); ul.className = "works";
+      items.forEach(e=>{
+        const li = document.createElement("li");
+        const isTC = e.media.some(m=>m[0]==="tc");
+        let chips = "";
+        if (!animeOnly.checked && inChartScope(e)) chips += '<span class="chip anime">画像版チャート掲載</span>';
+        chips += e.media.map(m=>{
+          const B = D.brands[m[0]] || D.brands.unknown;
+          const label = m[0]==="none" ? "未収録" : (m[0]==="bunko" ? "文庫" + m[1] : B.short + m[1] + (B.unit||""));
+          const oop = (grayOut.checked && isOop(m[0])) ? " oop" : "";
+          return '<span class="chip' + oop + '" style="background:' + B.color + '">' + esc(label) + '</span>';
+        }).join("");
+        li.innerHTML =
+          '<div class="work-row"><span class="issue">' + e.year + '年' + e.month + '月号</span>' +
+          '<span class="title' + (isTC ? " tenkomi" : "") + '">' + esc(e.title) + '</span>' +
+          '<span class="chips">' + chips + '</span></div>' +
+          '<div class="detail">' + detailHTML(e) + '</div>';
+        li.querySelector(".work-row").addEventListener("click", ()=>li.classList.toggle("open"));
+        ul.appendChild(li);
+      });
+      sec.appendChild(ul);
+      wrap.appendChild(sec);
+    }
+  }
+
+  // 収録単行本ビュー: 各作品を入手しやすいレーベル優先(てんコミ→プラス→カラー作品集→CC→FF→ぴっかぴか→文庫)で1冊に割り当てて巻ごとにまとめる
+  function renderShelf(wrap, list){
+    const ORDER = ["tc","plus","tcs","cc","ff","pika","bunko","none"];
+    const groups = {};  // brand -> volKey -> works[]
+    list.forEach(e=>{
+      const [brand, vol] = e.media[0];   // media は優先順に整列済み
+      ((groups[brand] = groups[brand] || {})[vol] = groups[brand][vol] || []).push(e);
+    });
+    // カバレッジ集計
+    const parts = [];
+    ORDER.forEach(brand=>{
+      if (!groups[brand] || brand==="none") return;
+      const B = D.brands[brand];
+      const vols = Object.keys(groups[brand]).length;
+      const works = Object.values(groups[brand]).reduce((s,w)=>s+w.length, 0);
+      parts.push(esc(B.short) + " " + vols + "冊(" + works + "本)");
+    });
+    const noneCnt = groups.none ? Object.values(groups.none).reduce((s,w)=>s+w.length,0) : 0;
+    const cov = document.createElement("div");
+    cov.className = "cohort-summary";
+    cov.innerHTML = "網羅するなら: " + (parts.join(" + ") || "−") +
+      (noneCnt ? " / 単行本未収録 " + noneCnt + "本" : "") +
+      "<br><span style='font-size:.85em;color:var(--muted)'>各作品は入手しやすいレーベル優先(てんコミ→プラス→カラー作品集→絶版各種)で1冊にだけ数えています。</span>";
+    wrap.appendChild(cov);
+
+    ORDER.forEach(brand=>{
+      if (!groups[brand]) return;
+      const B = D.brands[brand];
+      const volKeys = Object.keys(groups[brand]).sort((a,b)=>{
+        const na = parseInt(a,10), nb = parseInt(b,10);
+        return (isNaN(na)||isNaN(nb)) ? String(a).localeCompare(b,"ja") : na-nb;
+      });
+      const vols = volKeys.length;
+      const works = Object.values(groups[brand]).reduce((s,w)=>s+w.length,0);
+      const sec = document.createElement("section");
+      sec.className = "shelf-brand" + ((grayOut.checked && isOop(brand)) ? " grayed" : "");
+      const oopTag = (isOop(brand) && !B.name.includes("絶版")) ? "(絶版)" : "";
+      sec.innerHTML = '<h2><span>' + esc(brand==="none" ? "単行本未収録(当時)" : B.name) + oopTag + '</span>' +
+        '<span class="cnt">' + (brand==="none" ? works + "本" : vols + "冊・" + works + "本") + '</span></h2>';
+      if (brand === "none"){
+        const worksAll = Object.values(groups[brand]).flat().sort((a,b)=>(a.year*12+a.month)-(b.year*12+b.month));
+        sec.innerHTML += '<div class="shelf-note">' +
+          worksAll.map(e=>esc(e.title) + ' <span class="iss">(' + e.year + '年' + e.month + '月号・小' + e.grade + ')</span>').join("、") +
+          '<br>※現在は『藤子・F・不二雄大全集 ドラえもん』で読むことができます。</div>';
+        wrap.appendChild(sec); return;
+      }
+      const grid = document.createElement("div");
+      grid.className = "volgrid";
+      volKeys.forEach(vol=>{
+        const ws = groups[brand][vol].sort((a,b)=>(a.year*12+a.month)-(b.year*12+b.month));
+        const vi = D.volumes[brand + ":" + vol] || null;
+        const volLabel = brand==="bunko" ? "「"+esc(vol)+"」" : esc(vol) + (B.unit||"");
+        let cover = '<div class="ph" style="background:' + B.color + '">' + esc(B.short) + '<b>' + (brand==="bunko" ? "" : esc(vol)) + '</b></div>';
+        if (vi && vi.isbn) cover += '<img src="https://ndlsearch.ndl.go.jp/thumbnail/' + vi.isbn + '.jpg" alt="" loading="lazy" onerror="this.remove()">';
+        const link = (vi && vi.shogakukan && brand!=="pika") ?
+          '<a href="https://www.shogakukan.co.jp/books/' + vi.shogakukan + '" target="_blank" rel="noopener">小学館</a>' : '';
+        const card = document.createElement("div");
+        card.className = "volcard";
+        card.innerHTML = '<div class="cover">' + cover + '</div><div class="vinfo">' +
+          '<span class="vname">' + esc(B.short) + volLabel + '</span>' + link +
+          '<ul>' + ws.map(e=>'<li>' + esc(e.title) + ' <span class="iss">(' + e.year + '年' + e.month + '月号・小' + e.grade + ')</span></li>').join("") + '</ul></div>';
+        grid.appendChild(card);
+      });
+      sec.appendChild(grid);
+      wrap.appendChild(sec);
+    });
+  }
+
+  function setBirth(b, push){
+    sel.value = b;
+    ageSel.value = b;
+    render(+b);
+    if (push !== false) history.replaceState(null, "", "#y" + b);
+  }
+  sel.addEventListener("change", ()=>setBirth(+sel.value));
+  ageSel.addEventListener("change", ()=>setBirth(+ageSel.value));
+  animeOnly.addEventListener("change", ()=>render(+sel.value));
+  grayOut.addEventListener("change", ()=>render(+sel.value));
+  const tabTime = document.getElementById("viewTime"), tabShelf = document.getElementById("viewShelf");
+  function setView(v){
+    view = v;
+    tabTime.classList.toggle("active", v==="time");
+    tabShelf.classList.toggle("active", v==="shelf");
+    render(+sel.value);
+  }
+  tabTime.addEventListener("click", ()=>setView("time"));
+  tabShelf.addEventListener("click", ()=>setView("shelf"));
+  document.getElementById("prevY").addEventListener("click", ()=>{
+    const i = births.indexOf(+sel.value); if (i > 0) setBirth(births[i-1]);
+  });
+  document.getElementById("nextY").addEventListener("click", ()=>{
+    const i = births.indexOf(+sel.value); if (i < births.length-1) setBirth(births[i+1]);
+  });
+
+  function fromHash(){
+    const hash = location.hash.match(/^#y(\d{4})$/);
+    return hash && births.includes(+hash[1]) ? +hash[1] : null;
+  }
+  window.addEventListener("hashchange", ()=>{
+    const b = fromHash();
+    if (b && b !== +sel.value) setBirth(b, false);
+  });
+  setBirth(fromHash() || (births.includes(1970) ? 1970 : births[0]), false);
+})();
+</script>
+</body>
+</html>
