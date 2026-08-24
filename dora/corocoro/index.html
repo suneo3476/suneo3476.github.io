@@ -26,6 +26,21 @@ header a{color:#fff}
 .selector .agepick{display:block;margin-top:.5em;font-size:.9em}
 .selector .agepick select{font-size:1em;padding:.25em .5em}
 .selector .share{margin-top:.7em;min-height:20px}
+.viewtabs{margin-top:.8em;display:flex;justify-content:center;gap:.4em}
+.vtab{font-size:.95em;padding:.35em 1em;border:1px solid var(--blue);border-radius:99px;background:#fff;color:var(--blue-dark);cursor:pointer}
+.vtab.active{background:var(--blue);color:#fff;font-weight:700}
+ul.months{list-style:none;margin:0;padding:0}
+ul.months>li{border-top:1px solid var(--line);padding:.45em .9em;display:flex;gap:.7em;align-items:baseline;flex-wrap:wrap}
+ul.months>li:first-child{border-top:none}
+ul.months .mo{flex:0 0 5.2em;color:var(--muted);font-size:.85em;white-space:nowrap;font-variant-numeric:tabular-nums}
+ul.months .items{flex:1;min-width:0;display:flex;flex-wrap:wrap;gap:.25em .7em;font-size:.92em}
+.mi{white-space:nowrap}
+.mi .sub{color:var(--muted);font-size:.85em}
+.mi.daicho{font-weight:700}
+.mi.movie{font-weight:700}
+.mi .film{display:inline-block;font-size:.75em;font-weight:700;background:var(--red);color:#fff;border-radius:99px;padding:0 .5em;margin-left:.3em;vertical-align:middle}
+.mi-chip{font-size:.78em;padding:.05em .55em;border-radius:99px;background:#e4eef5;color:#41606f;white-space:nowrap}
+.mi-none{color:#b6c4cd;font-size:.85em}
 .cohort-summary{background:#fff8e2;border:1px solid #ecd98f;border-radius:10px;padding:.7em 1em;margin:0 0 1.2em;font-size:.95em}
 section.cat{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:0 0 1.2em;overflow:hidden}
 section.cat>h2{margin:0;background:var(--blue);color:#fff;font-size:1.02em;padding:.55em .9em;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.3em}
@@ -63,6 +78,10 @@ footer a{color:#fff}
     <button id="nextY" title="次の年度">▶</button>
     <span class="agepick">または 今年度の年齢: <select id="ageSel"></select></span>
     <span class="age" id="ageNote"></span>
+    <div class="viewtabs">
+      <button id="viewWorks" class="vtab active">作品リスト</button>
+      <button id="viewMonthly" class="vtab">月別リスト</button>
+    </div>
     <div class="share">
       <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://suneo3476.github.io/dora/corocoro/" data-lang="ja">ツイート</a>
     </div>
@@ -79,6 +98,7 @@ footer a{color:#fff}
       <li>大長編・映画コミカライズは毎年秋〜冬に連載され、翌年3月に映画が公開されました。映画バッジはあなたが映画公開時に何年生だったかを示します。</li>
       <li>日付は「◯月号」ベースです。実際の発売は号の約1か月前(15日頃)なので、手に取った時期は少し前にずれます。</li>
       <li>1995年9月〜2002年3月には毎号の再録枠がなかったとみられます(二次情報からの推定)。また一覧の性質上、1988年・2011年・2014年・2016〜2019年・2021年以降の映画コミカライズには取りこぼしの可能性があります。</li>
+      <li>再録枠・名作劇場で<b>各号にどの話が再録されたか</b>を網羅した公開資料は、調査した限り存在しません(メディア芸術データベースの雑誌目次データにもコロコロは未収録)。完全なリスト化には図書館所蔵の現物調査が必要です。</li>
       <li>「年度」は4月2日〜翌年4月1日生まれの区切りです。</li>
     </ul>
   </div>
@@ -171,6 +191,7 @@ footer a{color:#fff}
       wrap.innerHTML = '<div class="empty">この年度の小学生期間はコロコロ創刊(1977年5月号)前、またはデータ範囲外です。</div>';
       return;
     }
+    if (view === "monthly"){ renderMonthly(wrap, Y, w0, w1); return; }
     CATS.forEach(([key, label])=>{
       const items = hits.filter(h=>h.w.c===key).sort((x,y)=>x.w.s-y.w.s);
       if (!items.length) return;
@@ -210,6 +231,69 @@ footer a{color:#fff}
       wrap.appendChild(note);
     }
   }
+
+  // 月別リスト: 号ごとに載っていた作品を並べる
+  function renderMonthly(wrap, Y, w0, w1){
+    const DATA_START = Math.min(...W.map(w=>w.s));
+    for (let g = 1; g <= 6; g++){
+      const fy = Y + 6 + g;
+      const m0 = fy*12+4, m1 = (fy+1)*12+3;
+      const sec = document.createElement("section");
+      sec.className = "cat";
+      sec.innerHTML = '<h2><span>小学' + g + '年生</span><span class="cnt">' + fy + '年4月号〜' + (fy+1) + '年3月号</span></h2>';
+      if (m1 < DATA_START || m0 > DATA_END){
+        sec.innerHTML += '<div class="empty" style="border:none">' + (m1 < DATA_START ? "コロコロ創刊(1977年5月号)前です。" : "データ範囲(" + fmt(DATA_END) + "まで)の外です。") + '</div>';
+        wrap.appendChild(sec); continue;
+      }
+      const ul = document.createElement("ul"); ul.className = "months";
+      for (let m = m0; m <= m1; m++){
+        if (m > DATA_END) break;
+        const y = Math.floor((m-1)/12), mo = (m-1)%12+1;
+        const items = W.filter(w=>w.s<=m && m<=w.e);
+        let html2 = "";
+        items.sort((a,b)=>["daicho","movie","yomikiri","spin","waku","rerun"].indexOf(a.c) - ["daicho","movie","yomikiri","spin","waku","rerun"].indexOf(b.c));
+        items.forEach(w=>{
+          const short = esc(w.t.replace(/^ドラえもん[ 　]/,""));
+          const n = m - w.s + 1, total = w.e - w.s + 1;
+          if (w.c==="daicho" || w.c==="movie"){
+            let film = "";
+            if (m === w.e && w.my) film = '<span class="film">→' + w.my + '年3月 映画公開</span>';
+            html2 += '<span class="mi ' + w.c + '">『' + short + '』<span class="sub">第' + n + '回/全' + total + '回</span>' + film + '</span>';
+          } else if (w.c==="yomikiri"){
+            html2 += '<span class="mi">『' + short + '』<span class="sub">' + (total>1 ? '第' + n + '回/全' + total + '回' : '読切') + '</span></span>';
+          } else if (w.c==="waku"){
+            html2 += '<span class="mi-chip">ドラえもん(学年誌作品の再録枠)</span>';
+          } else if (w.c==="rerun"){
+            html2 += '<span class="mi-chip">名作劇場(てんコミ収録話の再録)※</span>';
+          } else {
+            html2 += '<span class="mi">' + esc(w.t) + '</span>';
+          }
+        });
+        if (!items.length) html2 = '<span class="mi-none">—</span>';
+        const li = document.createElement("li");
+        li.innerHTML = '<span class="mo">' + y + '年' + mo + '月号</span><div class="items">' + html2 + '</div>';
+        ul.appendChild(li);
+      }
+      sec.appendChild(ul);
+      wrap.appendChild(sec);
+    }
+    const foot = document.createElement("div");
+    foot.className = "gap-note";
+    foot.style.cssText = "border:1px solid #ecd98f;border-radius:10px;margin:0 0 1.2em";
+    foot.textContent = "※名作劇場は毎号掲載ではなく休載の号があります(2002年4月号〜2026年5月号で計243回)。再録枠・名作劇場で各号にどの話が載ったかを網羅した公開資料は現存せず、ここでは枠の存在のみ表示しています。";
+    wrap.appendChild(foot);
+  }
+
+  let view = "works";
+  const tabWorks = document.getElementById("viewWorks"), tabMonthly = document.getElementById("viewMonthly");
+  function setView(v){
+    view = v;
+    tabWorks.classList.toggle("active", v==="works");
+    tabMonthly.classList.toggle("active", v==="monthly");
+    render(+sel.value);
+  }
+  tabWorks.addEventListener("click", ()=>setView("works"));
+  tabMonthly.addEventListener("click", ()=>setView("monthly"));
 
   function setBirth(b, push){
     sel.value = b;
