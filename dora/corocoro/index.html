@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>あなたが小学生のときコロコロで読んだ『ドラえもん』</title>
+<meta name="description" content="生まれ年度を選ぶと、小学生の6年間に月刊コロコロコミックに載っていたドラえもん関連作品(大長編・映画コミカライズ・再録枠・スピンオフ)を一覧できます。">
+<style>
+:root{
+  --blue:#1c9fe0; --blue-dark:#0d6fa8; --red:#d0342c; --yellow:#f7c948;
+  --bg:#f2f8fc; --card:#ffffff; --ink:#20323e; --muted:#6b7f8c; --line:#d8e6ef;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+header{background:linear-gradient(135deg,var(--blue) 0%,var(--blue-dark) 100%);color:#fff;padding:1.4em 1em 1.1em;text-align:center}
+header h1{margin:0;font-size:1.3em;letter-spacing:.02em}
+header p{margin:.4em auto 0;max-width:44em;font-size:.85em;opacity:.92}
+header a{color:#fff}
+.wrap{max-width:860px;margin:0 auto;padding:1em}
+.selector{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1em;margin:-1.6em auto 1em;max-width:640px;box-shadow:0 4px 14px rgba(13,111,168,.12);text-align:center}
+.selector label{font-weight:700;margin-right:.5em}
+.selector select{font-size:1.05em;padding:.35em .6em;border:1px solid var(--line);border-radius:8px;background:#fff}
+.selector button{font-size:1em;padding:.3em .7em;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;margin:0 .25em}
+.selector button:hover{background:var(--bg)}
+.selector .age{display:block;margin-top:.4em;font-size:.85em;color:var(--muted)}
+.selector .agepick{display:block;margin-top:.5em;font-size:.9em}
+.selector .agepick select{font-size:1em;padding:.25em .5em}
+.selector .share{margin-top:.7em;min-height:20px}
+.cohort-summary{background:#fff8e2;border:1px solid #ecd98f;border-radius:10px;padding:.7em 1em;margin:0 0 1.2em;font-size:.95em}
+section.cat{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:0 0 1.2em;overflow:hidden}
+section.cat>h2{margin:0;background:var(--blue);color:#fff;font-size:1.02em;padding:.55em .9em;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.3em}
+section.cat>h2 .cnt{font-size:.78em;font-weight:400;opacity:.9}
+ul.works{list-style:none;margin:0;padding:0}
+ul.works>li{border-top:1px solid var(--line);padding:.6em .9em}
+ul.works>li:first-child{border-top:none}
+.wtitle{font-weight:700}
+.wtitle .movie-badge{display:inline-block;font-size:.72em;font-weight:700;background:var(--red);color:#fff;border-radius:99px;padding:.05em .6em;margin-left:.5em;vertical-align:middle}
+.wmeta{font-size:.82em;color:var(--muted)}
+.wyour{font-size:.86em;margin-top:.15em}
+.wyour b{color:var(--blue-dark)}
+.wnote{font-size:.78em;color:var(--muted);margin-top:.15em}
+.gap-note{padding:.6em .9em;font-size:.83em;background:#fff3d6;border-top:1px solid #ecd98f;color:#6b5a20}
+.empty{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1em;color:var(--muted)}
+.notes{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.9em 1.1em;font-size:.85em}
+.notes h3{margin:.2em 0 .4em;font-size:.95em}
+.notes ul{margin:.3em 0;padding-left:1.4em}
+footer{margin:2em 0 0;padding:1.4em 1em 2em;background:var(--blue-dark);color:#dceefb;font-size:.85em;text-align:center}
+footer a{color:#fff}
+</style>
+</head>
+<body>
+<header>
+  <h1>あなたが小学生のときコロコロで読んだ『ドラえもん』</h1>
+  <p>生まれ年度を選ぶと、小学生の6年間に『月刊コロコロコミック』に載っていたドラえもん関連作品(大長編・映画コミカライズ・再録枠・スピンオフ)を一覧できます。<br>
+  <a href="../cohort/">学年誌版(あなたが小学◯年生で読んだ『ドラえもん』)はこちら</a></p>
+</header>
+
+<div class="wrap">
+  <div class="selector">
+    <button id="prevY" title="前の年度">◀</button>
+    <label for="birthSel">生まれ年度</label>
+    <select id="birthSel"></select>
+    <button id="nextY" title="次の年度">▶</button>
+    <span class="agepick">または 今年度の年齢: <select id="ageSel"></select></span>
+    <span class="age" id="ageNote"></span>
+    <div class="share">
+      <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://suneo3476.github.io/dora/corocoro/" data-lang="ja">ツイート</a>
+    </div>
+  </div>
+
+  <div class="cohort-summary" id="summary"></div>
+  <div id="cats"></div>
+
+  <div class="notes">
+    <h3>このページについて</h3>
+    <ul>
+      <li>データはWikipedia「月刊コロコロコミック連載作品の一覧」から抽出・分類したものです(2026年8月時点)。<b>月刊本誌の連載のみ</b>で、読切・記事ページ・『別冊コロコロコミック』『コロコロイチバン！』は含まれません。</li>
+      <li>コロコロのドラえもん短編は、学年誌に載った作品の<b>再録</b>が主体です(コロコロ自体が「ドラえもんをまとめて読める雑誌」として1977年に創刊)。コロコロ初出と言えるのは大長編・映画コミカライズ・一部の読切です。</li>
+      <li>大長編・映画コミカライズは毎年秋〜冬に連載され、翌年3月に映画が公開されました。映画バッジはあなたが映画公開時に何年生だったかを示します。</li>
+      <li>日付は「◯月号」ベースです。実際の発売は号の約1か月前(15日頃)なので、手に取った時期は少し前にずれます。</li>
+      <li>1995年9月〜2002年3月には毎号の再録枠がなかったとみられます(二次情報からの推定)。また一覧の性質上、1988年・2011年・2014年・2016〜2019年・2021年以降の映画コミカライズには取りこぼしの可能性があります。</li>
+      <li>「年度」は4月2日〜翌年4月1日生まれの区切りです。</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  出典: Wikipedia「月刊コロコロコミック連載作品の一覧」ほか(精度・粒度の向上は今後の課題です)。<br>
+  <a href="../cohort/">学年誌版</a> / <a href="../">画像版チャート</a> / <a href="/">サイトTOP</a>
+</footer>
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script src="data.js?v=20260824a"></script>
+<script>
+(function(){
+  const W = CORO_DATA;
+  const DATA_END = Math.max(...W.map(w=>w.e));   // データの最終号
+  const CATS = [
+    ["daicho",  "大長編ドラえもん(藤子・F・不二雄 執筆/映画原作)"],
+    ["movie",   "映画コミカライズ(藤子・F 没後の映画まんが版)"],
+    ["yomikiri","読切・中編"],
+    ["waku",    "本誌のドラえもん掲載枠(学年誌からの再録が中心)"],
+    ["rerun",   "名作劇場(てんとう虫コミックス収録話の再掲載枠)"],
+    ["spin",    "関連作品・スピンオフ"]
+  ];
+
+  // 生まれ年度 → 小学生の号窓 [(Y+7)*12+4, (Y+13)*12+3]
+  function windowOf(Y){ return [(Y+7)*12+4, (Y+13)*12+3]; }
+  function fmt(m){ return Math.floor((m-1)/12) + "年" + ((m-1)%12+1) + "月号"; }
+
+  // 選択肢: 小学生期間がデータ期間と重なる年度
+  const births = [];
+  for (let Y = 1950; Y <= 2020; Y++){
+    const [w0,w1] = windowOf(Y);
+    if (w1 >= Math.min(...W.map(w=>w.s)) && w0 <= DATA_END) births.push(Y);
+  }
+
+  function fiscalNow(){
+    const now = new Date();
+    return now.getMonth()+1 >= 4 ? now.getFullYear() : now.getFullYear()-1;
+  }
+  function esc(s){ return String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+
+  const sel = document.getElementById("birthSel");
+  const ageSel = document.getElementById("ageSel");
+  const fyNow = fiscalNow();
+  births.forEach(b=>{
+    const o = document.createElement("option");
+    o.value = b; o.textContent = b + "年度生まれ";
+    sel.appendChild(o);
+  });
+  [...births].reverse().forEach(b=>{
+    const o = document.createElement("option");
+    o.value = b; o.textContent = (fyNow - b) + "歳";
+    ageSel.appendChild(o);
+  });
+
+  function gradeLabel(m, Y){  // 号 m を読んでいた学年
+    const y = Math.floor((m-1)/12), mo = (m-1)%12+1;
+    const fy = mo >= 4 ? y : y-1;
+    const g = fy - (Y+6);
+    return (g>=1 && g<=6) ? "小" + g : null;
+  }
+  function yourRange(s, e, Y){  // 窓との重なりを「小◯の◯月号〜」表記で
+    const [w0,w1] = windowOf(Y);
+    const a = Math.max(s,w0), b = Math.min(e,w1);
+    const ga = gradeLabel(a,Y), gb = gradeLabel(b,Y);
+    const am = (a-1)%12+1, bm = (b-1)%12+1;
+    if (a===b) return ga + "の" + am + "月号";
+    return ga + "の" + am + "月号〜" + gb + "の" + bm + "月号";
+  }
+
+  function render(Y){
+    const [w0,w1] = windowOf(Y);
+    document.getElementById("ageNote").textContent =
+      Y + "年4月2日〜" + (Y+1) + "年4月1日生まれ(今年度" + (fyNow-Y) + "歳になる方) / 小学生期間: " +
+      (Y+7) + "年4月〜" + (Y+13) + "年3月";
+    const hits = W.map(w=>{
+      const a = Math.max(w.s,w0), b = Math.min(w.e,w1);
+      return (a<=b) ? {w, a, b} : null;
+    }).filter(Boolean);
+    const movies = hits.filter(h=>h.w.my && h.w.my >= Y+8 && h.w.my <= Y+13).length;
+    const sum = document.getElementById("summary");
+    sum.innerHTML = "<b>" + Y + "年度生まれ</b>の方が小学生の間、コロコロに載っていたドラえもん関連作品は <b>" +
+      hits.length + "作品</b>。うち在学中に映画が公開された大長編・映画まんがは <b>" + movies + "本</b>です。" +
+      (w1 > DATA_END ? "<br><span style='font-size:.85em'>※小学生期間がまだ終わっていない(またはデータの最終号 " + fmt(DATA_END) + " 以降にかかる)ため、途中までの表示です。</span>" : "");
+
+    const wrap = document.getElementById("cats");
+    wrap.innerHTML = "";
+    if (!hits.length){
+      wrap.innerHTML = '<div class="empty">この年度の小学生期間はコロコロ創刊(1977年5月号)前、またはデータ範囲外です。</div>';
+      return;
+    }
+    CATS.forEach(([key, label])=>{
+      const items = hits.filter(h=>h.w.c===key).sort((x,y)=>x.w.s-y.w.s);
+      if (!items.length) return;
+      const sec = document.createElement("section");
+      sec.className = "cat";
+      sec.innerHTML = '<h2><span>' + esc(label) + '</span><span class="cnt">' + items.length + '作品</span></h2>';
+      const ul = document.createElement("ul"); ul.className = "works";
+      items.forEach(({w,a,b})=>{
+        const li = document.createElement("li");
+        let movieBadge = "";
+        if (w.my){
+          const g = w.my - (Y+7);
+          let when = null;
+          if (g >= 1 && g <= 6) when = "小" + g + "の3月に映画公開";
+          else if (g === 0) when = "入学直前の春に映画公開";
+          else if (g === 7) when = "卒業直後の春に映画公開";
+          if (when) movieBadge = '<span class="movie-badge">' + w.my + '年 ' + when + '</span>';
+        }
+        const author = esc(w.a) + (w.o ? "(原作: " + esc(w.o) + ")" : "");
+        li.innerHTML =
+          '<div class="wtitle">' + esc(w.t) + movieBadge + '</div>' +
+          '<div class="wmeta">' + author + ' / 掲載: ' + esc(w.sl) + '〜' + esc(w.el) + '</div>' +
+          '<div class="wyour">あなたが読めた期間: <b>' + yourRange(w.s, w.e, Y) + '</b></div>' +
+          (w.n ? '<div class="wnote">' + esc(w.n) + '</div>' : '');
+        ul.appendChild(li);
+      });
+      sec.appendChild(ul);
+      wrap.appendChild(sec);
+    });
+    // 再録枠の空白期間が小学生期間にかかる場合の注記
+    const gapS = 1995*12+9, gapE = 2002*12+3;
+    if (w1 >= gapS && w0 <= gapE){
+      const note = document.createElement("div");
+      note.className = "gap-note";
+      note.style.cssText = "border:1px solid #ecd98f;border-radius:10px;margin:0 0 1.2em";
+      note.textContent = "※1995年9月号〜2002年3月号の間は、短編を毎号載せる再録枠がなかったとみられます(この期間も大長編・映画まんが・ひみつ百科などは掲載)。";
+      wrap.appendChild(note);
+    }
+  }
+
+  function setBirth(b, push){
+    sel.value = b;
+    ageSel.value = b;
+    render(+b);
+    if (push !== false) history.replaceState(null, "", "#y" + b);
+  }
+  sel.addEventListener("change", ()=>setBirth(+sel.value));
+  ageSel.addEventListener("change", ()=>setBirth(+ageSel.value));
+  document.getElementById("prevY").addEventListener("click", ()=>{
+    const i = births.indexOf(+sel.value); if (i > 0) setBirth(births[i-1]);
+  });
+  document.getElementById("nextY").addEventListener("click", ()=>{
+    const i = births.indexOf(+sel.value); if (i < births.length-1) setBirth(births[i+1]);
+  });
+  function fromHash(){
+    const h = location.hash.match(/^#y(\d{4})$/);
+    return h && births.includes(+h[1]) ? +h[1] : null;
+  }
+  window.addEventListener("hashchange", ()=>{
+    const b = fromHash();
+    if (b && b !== +sel.value) setBirth(b, false);
+  });
+  setBirth(fromHash() || (births.includes(1970) ? 1970 : births[0]), false);
+})();
+</script>
+</body>
+</html>
